@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformJdIteminfoDao">
+
+    <sql id="Base_Column_List">
+        sku_id skuId,
+        outer_sku_id outerSkuId,
+        sku_name skuName,
+        jd_price jdPrice,
+        gift_point giftPoint,
+        wareid,
+        item_total itemTotal,
+        product_no productNo,
+        service_name serviceName,
+        order_id orderId
+    </sql>
+
+
+    <select id="findListCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM platform_jd_iteminfo
+    </select>
+
+    <select id="findList" resultType="map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_jd_iteminfo
+        limit 0,10
+    </select>
+
+    <select id="findById" resultType="demo.po.oms.PlatformJdIteminfo">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_jd_iteminfo
+        WHERE sku_id = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_jd_iteminfo
+        SET
+        <trim  suffixOverrides="," >
+        <if test="skuId !=null"> sku_id = #{skuId}, </if>
+        <if test="outerSkuId !=null"> outer_sku_id = #{outerSkuId}, </if>
+        <if test="skuName !=null"> sku_name = #{skuName}, </if>
+        <if test="jdPrice !=null"> jd_price = #{jdPrice}, </if>
+        <if test="giftPoint !=null"> gift_point = #{giftPoint}, </if>
+        <if test="wareid !=null"> wareid = #{wareid}, </if>
+        <if test="itemTotal !=null"> item_total = #{itemTotal}, </if>
+        <if test="productNo !=null"> product_no = #{productNo}, </if>
+        <if test="serviceName !=null"> service_name = #{serviceName}, </if>
+        <if test="orderId !=null"> order_id = #{orderId}, </if>
+        </trim>
+        WHERE sku_id = #{skuId} and order_id = #{orderId}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        platform_jd_iteminfo
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="skuId != null and skuId != ''" > sku_id, </if>
+            <if test="outerSkuId != null and outerSkuId != ''" > outer_sku_id, </if>
+            <if test="skuName != null and skuName != ''" > sku_name, </if>
+            <if test="jdPrice != null and jdPrice != ''" > jd_price, </if>
+            <if test="giftPoint != null and giftPoint != ''" > gift_point, </if>
+            <if test="wareid != null and wareid != ''" > wareid, </if>
+            <if test="itemTotal != null and itemTotal != ''" > item_total, </if>
+            <if test="productNo != null and productNo != ''" > product_no, </if>
+            <if test="serviceName != null and serviceName != ''" > service_name, </if>
+            <if test="orderId != null and orderId != ''" > order_id, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="skuId != null and skuId !=''" > #{skuId}, </if>
+            <if test="outerSkuId != null and outerSkuId !=''" > #{outerSkuId}, </if>
+            <if test="skuName != null and skuName !=''" > #{skuName}, </if>
+            <if test="jdPrice != null and jdPrice !=''" > #{jdPrice}, </if>
+            <if test="giftPoint != null and giftPoint !=''" > #{giftPoint}, </if>
+            <if test="wareid != null and wareid !=''" > #{wareid}, </if>
+            <if test="itemTotal != null and itemTotal !=''" > #{itemTotal}, </if>
+            <if test="productNo != null and productNo !=''" > #{productNo}, </if>
+            <if test="serviceName != null and serviceName !=''" > #{serviceName}, </if>
+            <if test="orderId != null and orderId !=''" > #{orderId}, </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM
+        platform_jd_iteminfo
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

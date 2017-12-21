@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformJdUserinfoDao">
+
+    <sql id="Base_Column_List">
+        id,
+        fullname,
+        telephone,
+        mobile,
+        full_address fullAddress,
+        province,
+        city,
+        county,
+        town,
+        province_id provinceId,
+        city_id cityId,
+        county_id countyId,
+        town_id townId
+    </sql>
+
+
+    <select id="findListCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM platform_jd_userinfo
+    </select>
+
+    <select id="findList" resultType="demo.po.oms.PlatformJdUserinfo">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_jd_userinfo
+        limit 0,10
+    </select>
+
+    <select id="findById" resultType="demo.po.oms.PlatformJdUserinfo">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_jd_userinfo
+        WHERE id = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_jd_userinfo
+        SET
+        <trim suffixOverrides="," >
+            <if test="id !=null"> id = #{id}, </if>
+            <if test="fullname !=null"> fullname = #{fullname}, </if>
+            <if test="telephone !=null"> telephone = #{telephone}, </if>
+            <if test="mobile !=null"> mobile = #{mobile}, </if>
+            <if test="fullAddress !=null"> full_address = #{fullAddress}, </if>
+            <if test="province !=null"> province = #{province}, </if>
+            <if test="city !=null"> city = #{city}, </if>
+            <if test="county !=null"> county = #{county}, </if>
+            <if test="town !=null"> town = #{town}, </if>
+            <if test="provinceId !=null"> province_id = #{provinceId}, </if>
+            <if test="cityId !=null"> city_id = #{cityId}, </if>
+            <if test="countyId !=null"> county_id = #{countyId}, </if>
+            <if test="townId !=null"> town_id = #{townId}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        platform_jd_userinfo
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id != ''" > id, </if>
+            <if test="fullname != null and fullname != ''" > fullname, </if>
+            <if test="telephone != null and telephone != ''" > telephone, </if>
+            <if test="mobile != null and mobile != ''" > mobile, </if>
+            <if test="fullAddress != null and fullAddress != ''" > full_address, </if>
+            <if test="province != null and province != ''" > province, </if>
+            <if test="city != null and city != ''" > city, </if>
+            <if test="county != null and county != ''" > county, </if>
+            <if test="town != null and town != ''" > town, </if>
+            <if test="provinceId != null and provinceId != ''" > province_id, </if>
+            <if test="cityId != null and cityId != ''" > city_id, </if>
+            <if test="countyId != null and countyId != ''" > county_id, </if>
+            <if test="townId != null and townId != ''" > town_id, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id !=''" > #{id}, </if>
+            <if test="fullname != null and fullname !=''" > #{fullname}, </if>
+            <if test="telephone != null and telephone !=''" > #{telephone}, </if>
+            <if test="mobile != null and mobile !=''" > #{mobile}, </if>
+            <if test="fullAddress != null and fullAddress !=''" > #{fullAddress}, </if>
+            <if test="province != null and province !=''" > #{province}, </if>
+            <if test="city != null and city !=''" > #{city}, </if>
+            <if test="county != null and county !=''" > #{county}, </if>
+            <if test="town != null and town !=''" > #{town}, </if>
+            <if test="provinceId != null and provinceId !=''" > #{provinceId}, </if>
+            <if test="cityId != null and cityId !=''" > #{cityId}, </if>
+            <if test="countyId != null and countyId !=''" > #{countyId}, </if>
+            <if test="townId != null and townId !=''" > #{townId}, </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM
+        platform_jd_userinfo
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

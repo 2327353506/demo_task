@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformAliTradeProductDao">
+
+    <sql id="Base_Column_List">
+        cargo_number cargoNumber,
+        product_cargo_number productCargoNumber,
+        description,
+        item_amount itemAmount,
+        name,
+        price,
+        product_id productId,
+        product_img_url productImgUrl,
+        product_snapshot_url productSnapshotUrl,
+        quantity,
+        refund,
+        sku_id skuId,
+        status,
+        subitem_id subitemId,
+        unit,
+        weight,
+        weight_unit weightUnit,
+        tid
+    </sql>
+
+
+    <select id="findListCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM platform_ali_trade_product
+    </select>
+
+    <select id="findList" resultType="demo.po.oms.PlatformAliTradeProduct">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_ali_trade_product
+        limit 0,10
+    </select>
+
+    <select id="findById" resultType="demo.po.oms.PlatformAliTradeProduct">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_ali_trade_product
+        WHERE subitem_id = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_ali_trade_product
+        SET
+        <trim  suffixOverrides="," >
+            <if test="cargoNumber !=null"> cargo_number = #{cargoNumber}, </if>
+            <if test="productCargoNumber !=null"> product_cargo_number = #{productCargoNumber}, </if>
+            <if test="description !=null"> description = #{description}, </if>
+            <if test="itemAmount !=null"> item_amount = #{itemAmount}, </if>
+            <if test="name !=null"> name = #{name}, </if>
+            <if test="price !=null"> price = #{price}, </if>
+            <if test="productId !=null"> product_id = #{productId}, </if>
+            <if test="productImgUrl !=null"> product_img_url = #{productImgUrl}, </if>
+            <if test="productSnapshotUrl !=null"> product_snapshot_url = #{productSnapshotUrl}, </if>
+            <if test="quantity !=null"> quantity = #{quantity}, </if>
+            <if test="refund !=null"> refund = #{refund}, </if>
+            <if test="skuId !=null"> sku_id = #{skuId}, </if>
+            <if test="status !=null"> status = #{status}, </if>
+            <if test="subitemId !=null"> subitem_id = #{subitemId}, </if>
+            <if test="unit !=null"> unit = #{unit}, </if>
+            <if test="weight !=null"> weight = #{weight}, </if>
+            <if test="weightUnit !=null"> weight_unit = #{weightUnit}, </if>
+            <if test="tid !=null"> tid = #{tid}, </if>
+        </trim>
+        WHERE subitem_id = #{subitemId}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        platform_ali_trade_product
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="cargoNumber != null and cargoNumber != ''" > cargo_number, </if>
+            <if test="productCargoNumber != null and productCargoNumber != ''" > product_cargo_number, </if>
+            <if test="description != null and description != ''" > description, </if>
+            <if test="itemAmount != null and itemAmount != ''" > item_amount, </if>
+            <if test="name != null and name != ''" > name, </if>
+            <if test="price != null and price != ''" > price, </if>
+            <if test="productId != null and productId != ''" > product_id, </if>
+            <if test="productImgUrl != null and productImgUrl != ''" > product_img_url, </if>
+            <if test="productSnapshotUrl != null and productSnapshotUrl != ''" > product_snapshot_url, </if>
+            <if test="quantity != null and quantity != ''" > quantity, </if>
+            <if test="refund != null and refund != ''" > refund, </if>
+            <if test="skuId != null and skuId != ''" > sku_id, </if>
+            <if test="status != null and status != ''" > status, </if>
+            <if test="subitemId != null and subitemId != ''" > subitem_id, </if>
+            <if test="unit != null and unit != ''" > unit, </if>
+            <if test="weight != null and weight != ''" > weight, </if>
+            <if test="weightUnit != null and weightUnit != ''" > weight_unit, </if>
+            <if test="tid != null and tid != ''" > tid, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="cargoNumber != null and cargoNumber !=''" > #{cargoNumber}, </if>
+            <if test="productCargoNumber != null and productCargoNumber !=''" > #{productCargoNumber}, </if>
+            <if test="description != null and description !=''" > #{description}, </if>
+            <if test="itemAmount != null and itemAmount !=''" > #{itemAmount}, </if>
+            <if test="name != null and name !=''" > #{name}, </if>
+            <if test="price != null and price !=''" > #{price}, </if>
+            <if test="productId != null and productId !=''" > #{productId}, </if>
+            <if test="productImgUrl != null and productImgUrl !=''" > #{productImgUrl}, </if>
+            <if test="productSnapshotUrl != null and productSnapshotUrl !=''" > #{productSnapshotUrl}, </if>
+            <if test="quantity != null and quantity !=''" > #{quantity}, </if>
+            <if test="refund != null and refund !=''" > #{refund}, </if>
+            <if test="skuId != null and skuId !=''" > #{skuId}, </if>
+            <if test="status != null and status !=''" > #{status}, </if>
+            <if test="subitemId != null and subitemId !=''" > #{subitemId}, </if>
+            <if test="unit != null and unit !=''" > #{unit}, </if>
+            <if test="weight != null and weight !=''" > #{weight}, </if>
+            <if test="weightUnit != null and weightUnit !=''" > #{weightUnit}, </if>
+            <if test="tid != null and tid !=''" > #{tid}, </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM
+        platform_ali_trade_product
+        WHERE subitem_id = #{id}
+    </delete>
+
+</mapper>

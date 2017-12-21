@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.pspire.JdpTbTradeDao">
+
+    <sql id="Base_Column_List">
+        tid,
+        status,
+        type,
+        seller_nick sellerNick,
+        buyer_nick buyerNick,
+        created,
+        modified,
+        jdp_hashcode jdpHashcode,
+        jdp_response jdpResponse,
+        jdp_created jdpCreated,
+        jdp_modified jdpModified
+    </sql>
+
+
+    <select id="findList" resultType="demo.po.jdp.JdpTbTrade">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM jdp_tb_trade
+        where jdp_modified > DATE_SUB(now(),INTERVAL 2 Day)
+        limit ${page*100},100
+    </select>
+
+
+</mapper>

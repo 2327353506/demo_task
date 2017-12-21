@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformAliTradeContactDao">
+
+    <sql id="Base_Column_List">
+        id,
+        phone,
+        fax,
+        email,
+        im_in_platform imInPlatform,
+        name,
+        mobile,
+        company_name companyName,
+        tid,
+        type
+    </sql>
+
+
+    <select id="findListCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM platform_ali_trade_contact
+    </select>
+
+    <select id="findList" resultType="demo.po.oms.PlatformAliTradeContact">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_ali_trade_contact
+        limit 0,10
+    </select>
+
+    <select id="findById" resultType="demo.po.oms.PlatformAliTradeContact">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_ali_trade_contact
+        WHERE id = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_ali_trade_contact
+        SET
+        <trim  suffixOverrides="," >
+            <if test="id !=null"> id = #{id}, </if>
+            <if test="phone !=null"> phone = #{phone}, </if>
+            <if test="fax !=null"> fax = #{fax}, </if>
+            <if test="email !=null"> email = #{email}, </if>
+            <if test="imInPlatform !=null"> im_in_platform = #{imInPlatform}, </if>
+            <if test="name !=null"> name = #{name}, </if>
+            <if test="mobile !=null"> mobile = #{mobile}, </if>
+            <if test="companyName !=null"> company_name = #{companyName}, </if>
+            <if test="tid !=null"> tid = #{tid}, </if>
+            <if test="type !=null"> type = #{type}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <insert id="save" >
+        INSERT INTO
+        platform_ali_trade_contact
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id != ''" > id, </if>
+            <if test="phone != null and phone != ''" > phone, </if>
+            <if test="fax != null and fax != ''" > fax, </if>
+            <if test="email != null and email != ''" > email, </if>
+            <if test="imInPlatform != null and imInPlatform != ''" > im_in_platform, </if>
+            <if test="name != null and name != ''" > name, </if>
+            <if test="mobile != null and mobile != ''" > mobile, </if>
+            <if test="companyName != null and companyName != ''" > company_name, </if>
+            <if test="tid != null and tid != ''" > tid, </if>
+            <if test="type != null and type != ''" > type, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id !=''" > #{id}, </if>
+            <if test="phone != null and phone !=''" > #{phone}, </if>
+            <if test="fax != null and fax !=''" > #{fax}, </if>
+            <if test="email != null and email !=''" > #{email}, </if>
+            <if test="imInPlatform != null and imInPlatform !=''" > #{imInPlatform}, </if>
+            <if test="name != null and name !=''" > #{name}, </if>
+            <if test="mobile != null and mobile !=''" > #{mobile}, </if>
+            <if test="companyName != null and companyName !=''" > #{companyName}, </if>
+            <if test="tid != null and tid !=''" > #{tid}, </if>
+            <if test="type != null and type !=''" > #{type}, </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM
+        platform_ali_trade_contact
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

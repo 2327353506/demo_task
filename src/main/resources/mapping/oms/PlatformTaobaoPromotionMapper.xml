@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformTaobaoPromotionDao">
+
+    <sql id="Base_Column_List">
+        id,
+        tid,
+        promotion_name promotionName,
+        discount_fee discountFee,
+        gift_item_name giftItemName,
+        gift_item_id giftItemId,
+        gift_item_num giftItemNum,
+        promotion_desc promotionDesc,
+        promotion_id promotionId
+    </sql>
+
+
+
+
+    <select id="findById" resultType="demo.po.oms.PlatformTaobaoPromotion">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_taobao_promotion
+        WHERE id = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_taobao_promotion
+        SET
+        <trim  suffixOverrides="," >
+            <if test="id !=null"> id = #{id}, </if>
+            <if test="tid !=null"> tid = #{tid}, </if>
+            <if test="promotionName !=null"> promotion_name = #{promotionName}, </if>
+            <if test="discountFee !=null"> discount_fee = #{discountFee}, </if>
+            <if test="giftItemName !=null"> gift_item_name = #{giftItemName}, </if>
+            <if test="giftItemId !=null"> gift_item_id = #{giftItemId}, </if>
+            <if test="giftItemNum !=null"> gift_item_num = #{giftItemNum}, </if>
+            <if test="promotionDesc !=null"> promotion_desc = #{promotionDesc}, </if>
+            <if test="promotionId !=null"> promotion_id = #{promotionId}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        platform_taobao_promotion
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id != ''" > id, </if>
+            <if test="tid != null and tid != ''" > tid, </if>
+            <if test="promotionName != null and promotionName != ''" > promotion_name, </if>
+            <if test="discountFee != null and discountFee != ''" > discount_fee, </if>
+            <if test="giftItemName != null and giftItemName != ''" > gift_item_name, </if>
+            <if test="giftItemId != null and giftItemId != ''" > gift_item_id, </if>
+            <if test="giftItemNum != null and giftItemNum != ''" > gift_item_num, </if>
+            <if test="promotionDesc != null and promotionDesc != ''" > promotion_desc, </if>
+            <if test="promotionId != null and promotionId != ''" > promotion_id, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id !=''" > #{id}, </if>
+            <if test="tid != null and tid !=''" > #{tid}, </if>
+            <if test="promotionName != null and promotionName !=''" > #{promotionName}, </if>
+            <if test="discountFee != null and discountFee !=''" > #{discountFee}, </if>
+            <if test="giftItemName != null and giftItemName !=''" > #{giftItemName}, </if>
+            <if test="giftItemId != null and giftItemId !=''" > #{giftItemId}, </if>
+            <if test="giftItemNum != null and giftItemNum !=''" > #{giftItemNum}, </if>
+            <if test="promotionDesc != null and promotionDesc !=''" > #{promotionDesc}, </if>
+            <if test="promotionId != null and promotionId !=''" > #{promotionId}, </if>
+        </trim>
+    </insert>
+
+
+
+</mapper>

@@ -1,0 +1,22 @@
+jd:
+  -
+    storeName: HUIPIN_DQ
+    token: e4ac0a07-394c-47f2-b88c-a9903c171e15
+    third: 146852
+  -
+    storeName: SCHNEIDER
+    token: 493522d9-4c62-4a36-afe3-5c51ee467956
+  -
+    storeName: ORIENT_PEARL
+    token: 06a49582-c7e4-4f94-bf2e-5ce2a80b65df
+  -
+    storeName: SSHANG
+    token: 3c289d3a-1304-4a64-93fd-6d6b074a8352
+    third: 225240
+  -
+    storeName: STANLEY
+    token: c6e1df03-f585-4cdd-a88e-868d828db008
+  -
+    storeName: GPH
+    token: d13f05c1-d334-4bda-bcab-9b188540435a
+    third: 52939

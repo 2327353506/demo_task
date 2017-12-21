@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformJdVatinfoDao">
+
+    <sql id="Base_Column_List">
+        id,
+        vatno,
+        address_registered addressRegistered,
+        phone_registered phoneRegistered,
+        deposit_bank depositBank,
+        bank_account bankAccount
+    </sql>
+
+
+    <select id="findListCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM platform_jd_vatinfo
+    </select>
+
+    <select id="findList" resultType="demo.po.oms.PlatformJdVatinfo">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_jd_vatinfo
+        limit 0,10
+    </select>
+
+    <select id="findById" resultType="demo.po.oms.PlatformJdVatinfo">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_jd_vatinfo
+        WHERE id = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_jd_vatinfo
+        SET
+        <trim suffixOverrides="," >
+            <if test="id !=null"> id = #{id}, </if>
+            <if test="vatno !=null"> vatno = #{vatno}, </if>
+            <if test="addressRegistered !=null"> address_registered = #{addressRegistered}, </if>
+            <if test="phoneRegistered !=null"> phone_registered = #{phoneRegistered}, </if>
+            <if test="depositBank !=null"> deposit_bank = #{depositBank}, </if>
+            <if test="bankAccount !=null"> bank_account = #{bankAccount}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        platform_jd_vatinfo
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id != ''" > id, </if>
+            <if test="vatno != null and vatno != ''" > vatno, </if>
+            <if test="addressRegistered != null and addressRegistered != ''" > address_registered, </if>
+            <if test="phoneRegistered != null and phoneRegistered != ''" > phone_registered, </if>
+            <if test="depositBank != null and depositBank != ''" > deposit_bank, </if>
+            <if test="bankAccount != null and bankAccount != ''" > bank_account, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id !=''" > #{id}, </if>
+            <if test="vatno != null and vatno !=''" > #{vatno}, </if>
+            <if test="addressRegistered != null and addressRegistered !=''" > #{addressRegistered}, </if>
+            <if test="phoneRegistered != null and phoneRegistered !=''" > #{phoneRegistered}, </if>
+            <if test="depositBank != null and depositBank !=''" > #{depositBank}, </if>
+            <if test="bankAccount != null and bankAccount !=''" > #{bankAccount}, </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM
+        platform_jd_vatinfo
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

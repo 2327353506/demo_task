@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformAliRefundDao">
+
+    <sql id="Base_Column_List">
+        id,
+        order_id orderId,
+        aftersale_agree_timeout aftersaleAgreeTimeout,
+        aftersale_auto_disburse aftersaleAutoDisburse,
+        alipay_payment_id alipayPaymentId,
+        apply_carriage applyCarriage,
+        apply_expect applyExpect,
+        apply_payment applyPayment,
+        apply_reason applyReason,
+        apply_subReason applySubReason,
+        buyer_alipay_id buyerAlipayId,
+        buyer_logistics_name buyerLogisticsName,
+        freight_bill freightBill,
+        buyer_send_goods buyerSendGoods,
+        buyer_user_id buyerUserId,
+        can_refund_payment canRefundPayment,
+        crm_modify_refund crmModifyRefund,
+        dispute_request disputeRequest,
+        dispute_type disputeType,
+        frozen_fund frozenFund,
+        gmt_apply gmtApply,
+        gmt_create gmtCreate,
+        gmt_modified gmtModified,
+        gmt_completed gmtCompleted,
+        gmt_timeout gmtTimeout,
+        goods_received goodsReceived,
+        goods_status goodsStatus,
+        only_refund onlyRefund,
+        product_name productName,
+        refund_carriage refundCarriage,
+        refund_goods refundGoods,
+        refund_id refundId,
+        refund_payment refundPayment,
+        reject_reason rejectReason,
+        seller_alipay_id sellerAlipayId,
+        seller_mobile sellerMobile,
+        seller_real_name sellerRealName,
+        seller_tel sellerTel,
+        seller_receive_address sellerReceiveAddress,
+        seller_userId sellerUserId,
+        status,
+        timeout_freeze timeoutFreeze
+    </sql>
+
+
+    <select id="findListCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM platform_ali_refund
+    </select>
+
+    <select id="findList" resultType="demo.po.oms.PlatformAliRefund">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_ali_refund
+        limit 0,10
+    </select>
+
+    <select id="findById" resultType="demo.po.oms.PlatformAliRefund">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_ali_refund
+        WHERE id = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_ali_refund
+        SET
+        <trim  suffixOverrides="," >
+            <if test="orderId !=null"> order_id = #{orderId}, </if>
+            <if test="aftersaleAgreeTimeout !=null"> aftersale_agree_timeout = #{aftersaleAgreeTimeout}, </if>
+            <if test="aftersaleAutoDisburse !=null"> aftersale_auto_disburse = #{aftersaleAutoDisburse}, </if>
+            <if test="alipayPaymentId !=null"> alipay_payment_id = #{alipayPaymentId}, </if>
+            <if test="applyCarriage !=null"> apply_carriage = #{applyCarriage}, </if>
+            <if test="applyExpect !=null"> apply_expect = #{applyExpect}, </if>
+            <if test="applyPayment !=null"> apply_payment = #{applyPayment}, </if>
+            <if test="applyReason !=null"> apply_reason = #{applyReason}, </if>
+            <if test="applySubReason !=null"> apply_subReason = #{applySubReason}, </if>
+            <if test="buyerAlipayId !=null"> buyer_alipay_id = #{buyerAlipayId}, </if>
+            <if test="buyerLogisticsName !=null"> buyer_logistics_name = #{buyerLogisticsName}, </if>
+            <if test="freightBill !=null"> freight_bill = #{freightBill}, </if>
+            <if test="buyerSendGoods !=null"> buyer_send_goods = #{buyerSendGoods}, </if>
+            <if test="buyerUserId !=null"> buyer_user_id = #{buyerUserId}, </if>
+            <if test="canRefundPayment !=null"> can_refund_payment = #{canRefundPayment}, </if>
+            <if test="crmModifyRefund !=null"> crm_modify_refund = #{crmModifyRefund}, </if>
+            <if test="disputeRequest !=null"> dispute_request = #{disputeRequest}, </if>
+            <if test="disputeType !=null"> dispute_type = #{disputeType}, </if>
+            <if test="frozenFund !=null"> frozen_fund = #{frozenFund}, </if>
+            <if test="gmtApply !=null"> gmt_apply = #{gmtApply}, </if>
+            <if test="gmtCreate !=null"> gmt_create = #{gmtCreate}, </if>
+            <if test="gmtModified !=null"> gmt_modified = #{gmtModified}, </if>
+            <if test="gmtCompleted !=null"> gmt_completed = #{gmtCompleted}, </if>
+            <if test="gmtTimeout !=null"> gmt_timeout = #{gmtTimeout}, </if>
+            <if test="goodsReceived !=null"> goods_received = #{goodsReceived}, </if>
+            <if test="goodsStatus !=null"> goods_status = #{goodsStatus}, </if>
+            <if test="onlyRefund !=null"> only_refund = #{onlyRefund}, </if>
+            <if test="productName !=null"> product_name = #{productName}, </if>
+            <if test="refundCarriage !=null"> refund_carriage = #{refundCarriage}, </if>
+            <if test="refundGoods !=null"> refund_goods = #{refundGoods}, </if>
+            <if test="refundId !=null"> refund_id = #{refundId}, </if>
+            <if test="refundPayment !=null"> refund_payment = #{refundPayment}, </if>
+            <if test="rejectReason !=null"> reject_reason = #{rejectReason}, </if>
+            <if test="sellerAlipayId !=null"> seller_alipay_id = #{sellerAlipayId}, </if>
+            <if test="sellerMobile !=null"> seller_mobile = #{sellerMobile}, </if>
+            <if test="sellerRealName !=null"> seller_real_name = #{sellerRealName}, </if>
+            <if test="sellerTel !=null"> seller_tel = #{sellerTel}, </if>
+            <if test="sellerReceiveAddress !=null"> seller_receive_address = #{sellerReceiveAddress}, </if>
+            <if test="sellerUserId !=null"> seller_userId = #{sellerUserId}, </if>
+            <if test="status !=null"> status = #{status}, </if>
+            <if test="timeoutFreeze !=null"> timeout_freeze = #{timeoutFreeze}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <insert id="save" >
+        INSERT INTO
+        platform_ali_refund
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id != ''" > id, </if>
+            <if test="orderId != null and orderId != ''" > order_id, </if>
+            <if test="aftersaleAgreeTimeout != null and aftersaleAgreeTimeout != ''" > aftersale_agree_timeout, </if>
+            <if test="aftersaleAutoDisburse != null and aftersaleAutoDisburse != ''" > aftersale_auto_disburse, </if>
+            <if test="alipayPaymentId != null and alipayPaymentId != ''" > alipay_payment_id, </if>
+            <if test="applyCarriage != null and applyCarriage != ''" > apply_carriage, </if>
+            <if test="applyExpect != null and applyExpect != ''" > apply_expect, </if>
+            <if test="applyPayment != null and applyPayment != ''" > apply_payment, </if>
+            <if test="applyReason != null and applyReason != ''" > apply_reason, </if>
+            <if test="applySubReason != null and applySubReason != ''" > apply_subReason, </if>
+            <if test="buyerAlipayId != null and buyerAlipayId != ''" > buyer_alipay_id, </if>
+            <if test="buyerLogisticsName != null and buyerLogisticsName != ''" > buyer_logistics_name, </if>
+            <if test="freightBill != null and freightBill != ''" > freight_bill, </if>
+            <if test="buyerSendGoods != null and buyerSendGoods != ''" > buyer_send_goods, </if>
+            <if test="buyerUserId != null and buyerUserId != ''" > buyer_user_id, </if>
+            <if test="canRefundPayment != null and canRefundPayment != ''" > can_refund_payment, </if>
+            <if test="crmModifyRefund != null and crmModifyRefund != ''" > crm_modify_refund, </if>
+            <if test="disputeRequest != null and disputeRequest != ''" > dispute_request, </if>
+            <if test="disputeType != null and disputeType != ''" > dispute_type, </if>
+            <if test="frozenFund != null and frozenFund != ''" > frozen_fund, </if>
+            <if test="gmtApply != null and gmtApply != ''" > gmt_apply, </if>
+            <if test="gmtCreate != null and gmtCreate != ''" > gmt_create, </if>
+            <if test="gmtModified != null and gmtModified != ''" > gmt_modified, </if>
+            <if test="gmtCompleted != null and gmtCompleted != ''" > gmt_completed, </if>
+            <if test="gmtTimeout != null and gmtTimeout != ''" > gmt_timeout, </if>
+            <if test="goodsReceived != null and goodsReceived != ''" > goods_received, </if>
+            <if test="goodsStatus != null and goodsStatus != ''" > goods_status, </if>
+            <if test="onlyRefund != null and onlyRefund != ''" > only_refund, </if>
+            <if test="productName != null and productName != ''" > product_name, </if>
+            <if test="refundCarriage != null and refundCarriage != ''" > refund_carriage, </if>
+            <if test="refundGoods != null and refundGoods != ''" > refund_goods, </if>
+            <if test="refundId != null and refundId != ''" > refund_id, </if>
+            <if test="refundPayment != null and refundPayment != ''" > refund_payment, </if>
+            <if test="rejectReason != null and rejectReason != ''" > reject_reason, </if>
+            <if test="sellerAlipayId != null and sellerAlipayId != ''" > seller_alipay_id, </if>
+            <if test="sellerMobile != null and sellerMobile != ''" > seller_mobile, </if>
+            <if test="sellerRealName != null and sellerRealName != ''" > seller_real_name, </if>
+            <if test="sellerTel != null and sellerTel != ''" > seller_tel, </if>
+            <if test="sellerReceiveAddress != null and sellerReceiveAddress != ''" > seller_receive_address, </if>
+            <if test="sellerUserId != null and sellerUserId != ''" > seller_userId, </if>
+            <if test="status != null and status != ''" > status, </if>
+            <if test="timeoutFreeze != null and timeoutFreeze != ''" > timeout_freeze, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id !=''" > #{id}, </if>
+            <if test="orderId != null and orderId !=''" > #{orderId}, </if>
+            <if test="aftersaleAgreeTimeout != null and aftersaleAgreeTimeout !=''" > #{aftersaleAgreeTimeout}, </if>
+            <if test="aftersaleAutoDisburse != null and aftersaleAutoDisburse !=''" > #{aftersaleAutoDisburse}, </if>
+            <if test="alipayPaymentId != null and alipayPaymentId !=''" > #{alipayPaymentId}, </if>
+            <if test="applyCarriage != null and applyCarriage !=''" > #{applyCarriage}, </if>
+            <if test="applyExpect != null and applyExpect !=''" > #{applyExpect}, </if>
+            <if test="applyPayment != null and applyPayment !=''" > #{applyPayment}, </if>
+            <if test="applyReason != null and applyReason !=''" > #{applyReason}, </if>
+            <if test="applySubReason != null and applySubReason !=''" > #{applySubReason}, </if>
+            <if test="buyerAlipayId != null and buyerAlipayId !=''" > #{buyerAlipayId}, </if>
+            <if test="buyerLogisticsName != null and buyerLogisticsName !=''" > #{buyerLogisticsName}, </if>
+            <if test="freightBill != null and freightBill !=''" > #{freightBill}, </if>
+            <if test="buyerSendGoods != null and buyerSendGoods !=''" > #{buyerSendGoods}, </if>
+            <if test="buyerUserId != null and buyerUserId !=''" > #{buyerUserId}, </if>
+            <if test="canRefundPayment != null and canRefundPayment !=''" > #{canRefundPayment}, </if>
+            <if test="crmModifyRefund != null and crmModifyRefund !=''" > #{crmModifyRefund}, </if>
+            <if test="disputeRequest != null and disputeRequest !=''" > #{disputeRequest}, </if>
+            <if test="disputeType != null and disputeType !=''" > #{disputeType}, </if>
+            <if test="frozenFund != null and frozenFund !=''" > #{frozenFund}, </if>
+            <if test="gmtApply != null and gmtApply !=''" > #{gmtApply}, </if>
+            <if test="gmtCreate != null and gmtCreate !=''" > #{gmtCreate}, </if>
+            <if test="gmtModified != null and gmtModified !=''" > #{gmtModified}, </if>
+            <if test="gmtCompleted != null and gmtCompleted !=''" > #{gmtCompleted}, </if>
+            <if test="gmtTimeout != null and gmtTimeout !=''" > #{gmtTimeout}, </if>
+            <if test="goodsReceived != null and goodsReceived !=''" > #{goodsReceived}, </if>
+            <if test="goodsStatus != null and goodsStatus !=''" > #{goodsStatus}, </if>
+            <if test="onlyRefund != null and onlyRefund !=''" > #{onlyRefund}, </if>
+            <if test="productName != null and productName !=''" > #{productName}, </if>
+            <if test="refundCarriage != null and refundCarriage !=''" > #{refundCarriage}, </if>
+            <if test="refundGoods != null and refundGoods !=''" > #{refundGoods}, </if>
+            <if test="refundId != null and refundId !=''" > #{refundId}, </if>
+            <if test="refundPayment != null and refundPayment !=''" > #{refundPayment}, </if>
+            <if test="rejectReason != null and rejectReason !=''" > #{rejectReason}, </if>
+            <if test="sellerAlipayId != null and sellerAlipayId !=''" > #{sellerAlipayId}, </if>
+            <if test="sellerMobile != null and sellerMobile !=''" > #{sellerMobile}, </if>
+            <if test="sellerRealName != null and sellerRealName !=''" > #{sellerRealName}, </if>
+            <if test="sellerTel != null and sellerTel !=''" > #{sellerTel}, </if>
+            <if test="sellerReceiveAddress != null and sellerReceiveAddress !=''" > #{sellerReceiveAddress}, </if>
+            <if test="sellerUserId != null and sellerUserId !=''" > #{sellerUserId}, </if>
+            <if test="status != null and status !=''" > #{status}, </if>
+            <if test="timeoutFreeze != null and timeoutFreeze !=''" > #{timeoutFreeze}, </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM
+        platform_ali_refund
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

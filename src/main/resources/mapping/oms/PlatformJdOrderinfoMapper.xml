@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformJdOrderinfoDao">
+
+    <sql id="Base_Column_List">
+        order_id orderId,
+        vender_id venderId,
+        order_type orderType,
+        pay_type payType,
+        order_total_price orderTotalPrice,
+        order_seller_price orderSellerPrice,
+        order_payment orderPayment,
+        freight_price freightPrice,
+        seller_discount sellerDiscount,
+        order_state orderState,
+        order_state_remark orderStateRemark,
+        delivery_type deliveryType,
+        invoice_info invoiceInfo,
+        invoice_code invoiceCode,
+        order_remark orderRemark,
+        order_start_time orderStartTime,
+        order_end_time orderEndTime,
+        vender_remark venderRemark,
+        balance_used balanceUsed,
+        pin,
+        return_order returnOrder,
+        payment_confirm_time paymentConfirmTime,
+        waybill,
+        logisticsid,
+        modified,
+        direct_parent_orderid directParentOrderid,
+        parent_orderid parentOrderid,
+        customs,
+        customs_model customsModel,
+        order_source orderSource,
+        store_order storeOrder,
+        idsop_shipmenttype idsopShipmenttype,
+        scdt,
+        service_fee serviceFee,
+        tax_fee taxFee,
+        tuihuowuyou,
+        order_sign orderSign,
+        store_id storeId,
+        userinfo_id userinfoId,
+        vatinfo_id vatinfoId
+    </sql>
+
+
+    <select id="findListCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM platform_jd_orderinfo
+    </select>
+
+    <select id="findList" resultType="map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_jd_orderinfo
+        limit 0,10
+    </select>
+
+    <select id="findById" resultType="demo.po.oms.PlatformJdOrderinfo">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_jd_orderinfo
+        WHERE order_id = #{orderId}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_jd_orderinfo
+        SET
+        <trim  suffixOverrides="," >
+            <if test="venderId !=null"> vender_id = #{venderId}, </if>
+            <if test="orderType !=null"> order_type = #{orderType}, </if>
+            <if test="payType !=null"> pay_type = #{payType}, </if>
+            <if test="orderTotalPrice !=null"> order_total_price = #{orderTotalPrice}, </if>
+            <if test="orderSellerPrice !=null"> order_seller_price = #{orderSellerPrice}, </if>
+            <if test="orderPayment !=null"> order_payment = #{orderPayment}, </if>
+            <if test="freightPrice !=null"> freight_price = #{freightPrice}, </if>
+            <if test="sellerDiscount !=null"> seller_discount = #{sellerDiscount}, </if>
+            <if test="orderState !=null"> order_state = #{orderState}, </if>
+            <if test="orderStateRemark !=null"> order_state_remark = #{orderStateRemark}, </if>
+            <if test="deliveryType !=null"> delivery_type = #{deliveryType}, </if>
+            <if test="invoiceInfo !=null"> invoice_info = #{invoiceInfo}, </if>
+            <if test="invoiceCode !=null"> invoice_code = #{invoiceCode}, </if>
+            <if test="orderRemark !=null"> order_remark = #{orderRemark}, </if>
+            <if test="orderStartTime !=null"> order_start_time = #{orderStartTime}, </if>
+            <if test="orderEndTime !=null"> order_end_time = #{orderEndTime}, </if>
+            <if test="venderRemark !=null"> vender_remark = #{venderRemark}, </if>
+            <if test="balanceUsed !=null"> balance_used = #{balanceUsed}, </if>
+            <if test="pin !=null"> pin = #{pin}, </if>
+            <if test="returnOrder !=null"> return_order = #{returnOrder}, </if>
+            <if test="paymentConfirmTime !=null"> payment_confirm_time = #{paymentConfirmTime}, </if>
+            <if test="waybill !=null"> waybill = #{waybill}, </if>
+            <if test="logisticsid !=null"> logisticsid = #{logisticsid}, </if>
+            <if test="modified !=null"> modified = #{modified}, </if>
+            <if test="directParentOrderid !=null"> direct_parent_orderid = #{directParentOrderid}, </if>
+            <if test="parentOrderid !=null"> parent_orderid = #{parentOrderid}, </if>
+            <if test="customs !=null"> customs = #{customs}, </if>
+            <if test="customsModel !=null"> customs_model = #{customsModel}, </if>
+            <if test="orderSource !=null"> order_source = #{orderSource}, </if>
+            <if test="storeOrder !=null"> store_order = #{storeOrder}, </if>
+            <if test="idsopShipmenttype !=null"> idsop_shipmenttype = #{idsopShipmenttype}, </if>
+            <if test="scdt !=null"> scdt = #{scdt}, </if>
+            <if test="serviceFee !=null"> service_fee = #{serviceFee}, </if>
+            <if test="taxFee !=null"> tax_fee = #{taxFee}, </if>
+            <if test="tuihuowuyou !=null"> tuihuowuyou = #{tuihuowuyou}, </if>
+            <if test="orderSign !=null"> order_sign = #{orderSign}, </if>
+            <if test="storeId !=null"> store_id = #{storeId}, </if>
+            <if test="userinfoId !=null"> userinfo_id = #{userinfoId}, </if>
+            <if test="vatinfoId !=null"> vatinfo_id = #{vatinfoId}, </if>
+        </trim>
+        WHERE order_id = #{orderId}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        platform_jd_orderinfo
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="orderId != null and orderId != ''" > order_id, </if>
+            <if test="venderId != null and venderId != ''" > vender_id, </if>
+            <if test="orderType != null and orderType != ''" > order_type, </if>
+            <if test="payType != null and payType != ''" > pay_type, </if>
+            <if test="orderTotalPrice != null and orderTotalPrice != ''" > order_total_price, </if>
+            <if test="orderSellerPrice != null and orderSellerPrice != ''" > order_seller_price, </if>
+            <if test="orderPayment != null and orderPayment != ''" > order_payment, </if>
+            <if test="freightPrice != null and freightPrice != ''" > freight_price, </if>
+            <if test="sellerDiscount != null and sellerDiscount != ''" > seller_discount, </if>
+            <if test="orderState != null and orderState != ''" > order_state, </if>
+            <if test="orderStateRemark != null and orderStateRemark != ''" > order_state_remark, </if>
+            <if test="deliveryType != null and deliveryType != ''" > delivery_type, </if>
+            <if test="invoiceInfo != null and invoiceInfo != ''" > invoice_info, </if>
+            <if test="invoiceCode != null and invoiceCode != ''" > invoice_code, </if>
+            <if test="orderRemark != null and orderRemark != ''" > order_remark, </if>
+            <if test="orderStartTime != null and orderStartTime != ''" > order_start_time, </if>
+            <if test="orderEndTime != null and orderEndTime != ''" > order_end_time, </if>
+            <if test="venderRemark != null and venderRemark != ''" > vender_remark, </if>
+            <if test="balanceUsed != null and balanceUsed != ''" > balance_used, </if>
+            <if test="pin != null and pin != ''" > pin, </if>
+            <if test="returnOrder != null and returnOrder != ''" > return_order, </if>
+            <if test="paymentConfirmTime != null and paymentConfirmTime != ''" > payment_confirm_time, </if>
+            <if test="waybill != null and waybill != ''" > waybill, </if>
+            <if test="logisticsid != null and logisticsid != ''" > logisticsid, </if>
+            <if test="modified != null and modified != ''" > modified, </if>
+            <if test="directParentOrderid != null and directParentOrderid != ''" > direct_parent_orderid, </if>
+            <if test="parentOrderid != null and parentOrderid != ''" > parent_orderid, </if>
+            <if test="customs != null and customs != ''" > customs, </if>
+            <if test="customsModel != null and customsModel != ''" > customs_model, </if>
+            <if test="orderSource != null and orderSource != ''" > order_source, </if>
+            <if test="storeOrder != null and storeOrder != ''" > store_order, </if>
+            <if test="idsopShipmenttype != null and idsopShipmenttype != ''" > idsop_shipmenttype, </if>
+            <if test="scdt != null and scdt != ''" > scdt, </if>
+            <if test="serviceFee != null and serviceFee != ''" > service_fee, </if>
+            <if test="taxFee != null and taxFee != ''" > tax_fee, </if>
+            <if test="tuihuowuyou != null and tuihuowuyou != ''" > tuihuowuyou, </if>
+            <if test="orderSign != null and orderSign != ''" > order_sign, </if>
+            <if test="storeId != null and storeId != ''" > store_id, </if>
+            <if test="userinfoId != null and userinfoId != ''" > userinfo_id, </if>
+            <if test="vatinfoId != null and vatinfoId != ''" > vatinfo_id, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="orderId != null and orderId !=''" > #{orderId}, </if>
+            <if test="venderId != null and venderId !=''" > #{venderId}, </if>
+            <if test="orderType != null and orderType !=''" > #{orderType}, </if>
+            <if test="payType != null and payType !=''" > #{payType}, </if>
+            <if test="orderTotalPrice != null and orderTotalPrice !=''" > #{orderTotalPrice}, </if>
+            <if test="orderSellerPrice != null and orderSellerPrice !=''" > #{orderSellerPrice}, </if>
+            <if test="orderPayment != null and orderPayment !=''" > #{orderPayment}, </if>
+            <if test="freightPrice != null and freightPrice !=''" > #{freightPrice}, </if>
+            <if test="sellerDiscount != null and sellerDiscount !=''" > #{sellerDiscount}, </if>
+            <if test="orderState != null and orderState !=''" > #{orderState}, </if>
+            <if test="orderStateRemark != null and orderStateRemark !=''" > #{orderStateRemark}, </if>
+            <if test="deliveryType != null and deliveryType !=''" > #{deliveryType}, </if>
+            <if test="invoiceInfo != null and invoiceInfo !=''" > #{invoiceInfo}, </if>
+            <if test="invoiceCode != null and invoiceCode !=''" > #{invoiceCode}, </if>
+            <if test="orderRemark != null and orderRemark !=''" > #{orderRemark}, </if>
+            <if test="orderStartTime != null and orderStartTime !=''" > #{orderStartTime}, </if>
+            <if test="orderEndTime != null and orderEndTime !=''" > #{orderEndTime}, </if>
+            <if test="venderRemark != null and venderRemark !=''" > #{venderRemark}, </if>
+            <if test="balanceUsed != null and balanceUsed !=''" > #{balanceUsed}, </if>
+            <if test="pin != null and pin !=''" > #{pin}, </if>
+            <if test="returnOrder != null and returnOrder !=''" > #{returnOrder}, </if>
+            <if test="paymentConfirmTime != null and paymentConfirmTime !=''" > #{paymentConfirmTime}, </if>
+            <if test="waybill != null and waybill !=''" > #{waybill}, </if>
+            <if test="logisticsid != null and logisticsid !=''" > #{logisticsid}, </if>
+            <if test="modified != null and modified !=''" > #{modified}, </if>
+            <if test="directParentOrderid != null and directParentOrderid !=''" > #{directParentOrderid}, </if>
+            <if test="parentOrderid != null and parentOrderid !=''" > #{parentOrderid}, </if>
+            <if test="customs != null and customs !=''" > #{customs}, </if>
+            <if test="customsModel != null and customsModel !=''" > #{customsModel}, </if>
+            <if test="orderSource != null and orderSource !=''" > #{orderSource}, </if>
+            <if test="storeOrder != null and storeOrder !=''" > #{storeOrder}, </if>
+            <if test="idsopShipmenttype != null and idsopShipmenttype !=''" > #{idsopShipmenttype}, </if>
+            <if test="scdt != null and scdt !=''" > #{scdt}, </if>
+            <if test="serviceFee != null and serviceFee !=''" > #{serviceFee}, </if>
+            <if test="taxFee != null and taxFee !=''" > #{taxFee}, </if>
+            <if test="tuihuowuyou != null and tuihuowuyou !=''" > #{tuihuowuyou}, </if>
+            <if test="orderSign != null and orderSign !=''" > #{orderSign}, </if>
+            <if test="storeId != null and storeId !=''" > #{storeId}, </if>
+            <if test="userinfoId != null and userinfoId !=''" > #{userinfoId}, </if>
+            <if test="vatinfoId != null and vatinfoId !=''" > #{vatinfoId}, </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM
+        platform_jd_orderinfo
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformTaobaoRefundDao">
+
+    <sql id="Base_Column_List">
+        refund_id refundId,
+        shipping_type shippingType,
+        cs_status csStatus,
+        advance_status advanceStatus,
+        split_taobao_fee splitTaobaoFee,
+        split_seller_fee splitSellerFee,
+        tid,
+        oid,
+        alipay_no alipayNo,
+        total_fee totalFee,
+        buyer_nick buyerNick,
+        seller_nick sellerNick,
+        created,
+        modified,
+        order_status orderStatus,
+        status,
+        good_status goodStatus,
+        has_good_return hasGoodReturn,
+        refund_fee refundFee,
+        payment,
+        reason,
+        `desc`,
+        title,
+        price,
+        num,
+        good_return_time goodReturnTime,
+        company_name companyName,
+        sid,
+        address,
+        num_iid numIid,
+        refund_phase refundPhase,
+        refund_version refundVersion,
+        sku,
+        attribute,
+        outer_id outerId,
+        operation_contraint operationContraint
+    </sql>
+
+
+    <select id="findListCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM platform_taobao_refund
+    </select>
+
+    <select id="findList" resultType="demo.po.oms.PlatformTaobaoRefund">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_taobao_refund
+        limit 0,10
+    </select>
+
+    <select id="findById" resultType="demo.po.oms.PlatformTaobaoRefund">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_taobao_refund
+        WHERE refund_id = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_taobao_refund
+        SET
+        <trim  suffixOverrides="," >
+            <if test="refundId !=null"> refund_id = #{refundId}, </if>
+            <if test="shippingType !=null"> shipping_type = #{shippingType}, </if>
+            <if test="csStatus !=null"> cs_status = #{csStatus}, </if>
+            <if test="advanceStatus !=null"> advance_status = #{advanceStatus}, </if>
+            <if test="splitTaobaoFee !=null"> split_taobao_fee = #{splitTaobaoFee}, </if>
+            <if test="splitSellerFee !=null"> split_seller_fee = #{splitSellerFee}, </if>
+            <if test="tid !=null"> tid = #{tid}, </if>
+            <if test="oid !=null"> oid = #{oid}, </if>
+            <if test="alipayNo !=null"> alipay_no = #{alipayNo}, </if>
+            <if test="totalFee !=null"> total_fee = #{totalFee}, </if>
+            <if test="buyerNick !=null"> buyer_nick = #{buyerNick}, </if>
+            <if test="sellerNick !=null"> seller_nick = #{sellerNick}, </if>
+            <if test="created !=null"> created = #{created}, </if>
+            <if test="modified !=null"> modified = #{modified}, </if>
+            <if test="orderStatus !=null"> order_status = #{orderStatus}, </if>
+            <if test="status !=null"> status = #{status}, </if>
+            <if test="goodStatus !=null"> good_status = #{goodStatus}, </if>
+            <if test="hasGoodReturn !=null"> has_good_return = #{hasGoodReturn}, </if>
+            <if test="refundFee !=null"> refund_fee = #{refundFee}, </if>
+            <if test="payment !=null"> payment = #{payment}, </if>
+            <if test="reason !=null"> reason = #{reason}, </if>
+            <if test="desc !=null"> `desc` = #{desc}, </if>
+            <if test="title !=null"> title = #{title}, </if>
+            <if test="price !=null"> price = #{price}, </if>
+            <if test="num !=null"> num = #{num}, </if>
+            <if test="goodReturnTime !=null"> good_return_time = #{goodReturnTime}, </if>
+            <if test="companyName !=null"> company_name = #{companyName}, </if>
+            <if test="sid !=null"> sid = #{sid}, </if>
+            <if test="address !=null"> address = #{address}, </if>
+            <if test="numIid !=null"> num_iid = #{numIid}, </if>
+            <if test="refundPhase !=null"> refund_phase = #{refundPhase}, </if>
+            <if test="refundVersion !=null"> refund_version = #{refundVersion}, </if>
+            <if test="sku !=null"> sku = #{sku}, </if>
+            <if test="attribute !=null"> attribute = #{attribute}, </if>
+            <if test="outerId !=null"> outer_id = #{outerId}, </if>
+            <if test="operationContraint !=null"> operation_contraint = #{operationContraint}, </if>
+        </trim>
+        WHERE refund_id = #{refundId}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        platform_taobao_refund
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="refundId != null and refundId != ''" > refund_id, </if>
+            <if test="shippingType != null and shippingType != ''" > shipping_type, </if>
+            <if test="csStatus != null and csStatus != ''" > cs_status, </if>
+            <if test="advanceStatus != null and advanceStatus != ''" > advance_status, </if>
+            <if test="splitTaobaoFee != null and splitTaobaoFee != ''" > split_taobao_fee, </if>
+            <if test="splitSellerFee != null and splitSellerFee != ''" > split_seller_fee, </if>
+            <if test="tid != null and tid != ''" > tid, </if>
+            <if test="oid != null and oid != ''" > oid, </if>
+            <if test="alipayNo != null and alipayNo != ''" > alipay_no, </if>
+            <if test="totalFee != null and totalFee != ''" > total_fee, </if>
+            <if test="buyerNick != null and buyerNick != ''" > buyer_nick, </if>
+            <if test="sellerNick != null and sellerNick != ''" > seller_nick, </if>
+            <if test="created != null and created != ''" > created, </if>
+            <if test="modified != null and modified != ''" > modified, </if>
+            <if test="orderStatus != null and orderStatus != ''" > order_status, </if>
+            <if test="status != null and status != ''" > status, </if>
+            <if test="goodStatus != null and goodStatus != ''" > good_status, </if>
+            <if test="hasGoodReturn != null and hasGoodReturn != ''" > has_good_return, </if>
+            <if test="refundFee != null and refundFee != ''" > refund_fee, </if>
+            <if test="payment != null and payment != ''" > payment, </if>
+            <if test="reason != null and reason != ''" > reason, </if>
+            <if test="desc != null and desc != ''" > `desc`, </if>
+            <if test="title != null and title != ''" > title, </if>
+            <if test="price != null and price != ''" > price, </if>
+            <if test="num != null and num != ''" > num, </if>
+            <if test="goodReturnTime != null and goodReturnTime != ''" > good_return_time, </if>
+            <if test="companyName != null and companyName != ''" > company_name, </if>
+            <if test="sid != null and sid != ''" > sid, </if>
+            <if test="address != null and address != ''" > address, </if>
+            <if test="numIid != null and numIid != ''" > num_iid, </if>
+            <if test="refundPhase != null and refundPhase != ''" > refund_phase, </if>
+            <if test="refundVersion != null and refundVersion != ''" > refund_version, </if>
+            <if test="sku != null and sku != ''" > sku, </if>
+            <if test="attribute != null and attribute != ''" > attribute, </if>
+            <if test="outerId != null and outerId != ''" > outer_id, </if>
+            <if test="operationContraint != null and operationContraint != ''" > operation_contraint, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="refundId != null and refundId !=''" > #{refundId}, </if>
+            <if test="shippingType != null and shippingType !=''" > #{shippingType}, </if>
+            <if test="csStatus != null and csStatus !=''" > #{csStatus}, </if>
+            <if test="advanceStatus != null and advanceStatus !=''" > #{advanceStatus}, </if>
+            <if test="splitTaobaoFee != null and splitTaobaoFee !=''" > #{splitTaobaoFee}, </if>
+            <if test="splitSellerFee != null and splitSellerFee !=''" > #{splitSellerFee}, </if>
+            <if test="tid != null and tid !=''" > #{tid}, </if>
+            <if test="oid != null and oid !=''" > #{oid}, </if>
+            <if test="alipayNo != null and alipayNo !=''" > #{alipayNo}, </if>
+            <if test="totalFee != null and totalFee !=''" > #{totalFee}, </if>
+            <if test="buyerNick != null and buyerNick !=''" > #{buyerNick}, </if>
+            <if test="sellerNick != null and sellerNick !=''" > #{sellerNick}, </if>
+            <if test="created != null and created !=''" > #{created}, </if>
+            <if test="modified != null and modified !=''" > #{modified}, </if>
+            <if test="orderStatus != null and orderStatus !=''" > #{orderStatus}, </if>
+            <if test="status != null and status !=''" > #{status}, </if>
+            <if test="goodStatus != null and goodStatus !=''" > #{goodStatus}, </if>
+            <if test="hasGoodReturn != null and hasGoodReturn !=''" > #{hasGoodReturn}, </if>
+            <if test="refundFee != null and refundFee !=''" > #{refundFee}, </if>
+            <if test="payment != null and payment !=''" > #{payment}, </if>
+            <if test="reason != null and reason !=''" > #{reason}, </if>
+            <if test="desc != null and desc !=''" > #{desc}, </if>
+            <if test="title != null and title !=''" > #{title}, </if>
+            <if test="price != null and price !=''" > #{price}, </if>
+            <if test="num != null and num !=''" > #{num}, </if>
+            <if test="goodReturnTime != null and goodReturnTime !=''" > #{goodReturnTime}, </if>
+            <if test="companyName != null and companyName !=''" > #{companyName}, </if>
+            <if test="sid != null and sid !=''" > #{sid}, </if>
+            <if test="address != null and address !=''" > #{address}, </if>
+            <if test="numIid != null and numIid !=''" > #{numIid}, </if>
+            <if test="refundPhase != null and refundPhase !=''" > #{refundPhase}, </if>
+            <if test="refundVersion != null and refundVersion !=''" > #{refundVersion}, </if>
+            <if test="sku != null and sku !=''" > #{sku}, </if>
+            <if test="attribute != null and attribute !=''" > #{attribute}, </if>
+            <if test="outerId != null and outerId !=''" > #{outerId}, </if>
+            <if test="operationContraint != null and operationContraint !=''" > #{operationContraint}, </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM
+            platform_taobao_refund
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

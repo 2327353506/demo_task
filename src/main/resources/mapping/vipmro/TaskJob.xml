@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.vipmro.TaskJobDao" >
+
+    <sql id="Base_Column_List">
+        id,
+        job_name jobName,
+        job_cron_expression jobCronExpression,
+        job_class jobClass,
+        job_id jobId,
+        update_dt updateDt,
+        create_dt createDt,
+        status
+    </sql>
+
+    <select id="findEnableTask"  resultType="demo.po.TaskJob">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_task_job
+        WHERE status = 1
+        ${limit}
+    </select>
+
+    <select id="findTaskList"  resultType="demo.po.TaskJob">
+      SELECT
+        <include refid="Base_Column_List"/>
+      FROM sys_task_job
+      WHERE status != 2
+        <if test="jobName != null and jobName !=''">
+            and job_name like '${jobName}%'
+        </if>
+        <if test="status != null and status !=''">
+            and status = #{status}
+        </if>
+        order by updateDt desc
+      ${limit}
+    </select>
+
+    <select id="findTaskListCount" resultType="int">
+        SELECT
+            COUNT(1)
+        FROM sys_task_job
+        WHERE status != 2
+        <if test="jobName != null and jobName !=''">
+            and job_name like '${jobName}%'
+        </if>
+        <if test="status != null and status !=''">
+            and status = #{status}
+        </if>
+    </select>
+
+    <select id="findTaskAll"  resultType="demo.po.TaskJob">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_task_job
+    </select>
+
+    <select id="findTaskById"  resultType="demo.po.TaskJob">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_task_job
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateTaskStatus">
+        UPDATE
+          sys_task_job
+        SET
+          status = #{code},
+          update_dt = now()
+        WHERE id = #{id}
+
+    </update>
+
+
+    <update id="updateTask">
+        UPDATE
+        sys_task_job
+        SET
+        <if test="id !=null"> id = #{id}, </if>
+        <if test="jobName !=null"> job_name = #{jobName}, </if>
+        <if test="jobCronExpression !=null"> job_cron_expression = #{jobCronExpression}, </if>
+        <if test="jobClass !=null"> job_class = #{jobClass}, </if>
+        <if test="jobId !=null"> job_id = #{jobId}, </if>
+        <if test="status !=null"> status = #{status}, </if>
+        update_dt = now()
+        WHERE id = #{id}
+    </update>
+
+    <insert id="saveTask" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        sys_task_job
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id != ''" > id, </if>
+            <if test="jobName != null and jobName != ''" > job_name, </if>
+            <if test="jobCronExpression != null and jobCronExpression != ''" > job_cron_expression, </if>
+            <if test="jobClass != null and jobClass != ''" > job_class, </if>
+            <if test="jobId != null and jobId != ''" > job_id, </if>
+            <if test="status != null and status != ''" > status, </if>
+             update_dt,
+            create_dt
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id !=''" > #{id}, </if>
+            <if test="jobName != null and jobName !=''" > #{jobName}, </if>
+            <if test="jobCronExpression != null and jobCronExpression !=''" > #{jobCronExpression}, </if>
+            <if test="jobClass != null and jobClass !=''" > #{jobClass}, </if>
+            <if test="jobId != null and jobId !=''" > #{jobId}, </if>
+            <if test="status != null and status !=''" > #{status}, </if>
+            now(),
+            now()
+        </trim>
+    </insert>
+
+    <select id="findTaskByClass"  resultType="demo.po.TaskJob">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_task_job
+        WHERE job_class = #{clazz} and status = 1
+    </select>
+
+</mapper>

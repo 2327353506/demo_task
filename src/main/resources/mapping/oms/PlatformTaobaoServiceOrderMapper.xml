@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformTaobaoServiceOrderDao">
+
+    <sql id="Base_Column_List">
+        oid,
+        tid,
+        item_oid itemOid,
+        service_id serviceId,
+        service_detail_url serviceDetailUrl,
+        num,
+        price,
+        payment,
+        title,
+        total_fee totalFee,
+        buyer_nick buyerNick,
+        refund_id refundId,
+        seller_nick sellerNick,
+        pic_path picPath,
+        tmser_spu_code tmserSpuCode,
+        oid_str oidStr
+    </sql>
+
+
+
+
+    <select id="findById" resultType="demo.po.oms.PlatformTaobaoServiceOrder">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_taobao_service_order
+        WHERE oid = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_taobao_service_order
+        SET
+        <trim  suffixOverrides="," >
+            <if test="oid !=null"> oid = #{oid}, </if>
+            <if test="tid !=null"> tid = #{tid}, </if>
+            <if test="itemOid !=null"> item_oid = #{itemOid}, </if>
+            <if test="serviceId !=null"> service_id = #{serviceId}, </if>
+            <if test="serviceDetailUrl !=null"> service_detail_url = #{serviceDetailUrl}, </if>
+            <if test="num !=null"> num = #{num}, </if>
+            <if test="price !=null"> price = #{price}, </if>
+            <if test="payment !=null"> payment = #{payment}, </if>
+            <if test="title !=null"> title = #{title}, </if>
+            <if test="totalFee !=null"> total_fee = #{totalFee}, </if>
+            <if test="buyerNick !=null"> buyer_nick = #{buyerNick}, </if>
+            <if test="refundId !=null"> refund_id = #{refundId}, </if>
+            <if test="sellerNick !=null"> seller_nick = #{sellerNick}, </if>
+            <if test="picPath !=null"> pic_path = #{picPath}, </if>
+            <if test="tmserSpuCode !=null"> tmser_spu_code = #{tmserSpuCode}, </if>
+            <if test="oidStr !=null"> oid_str = #{oidStr}, </if>
+        </trim>
+        WHERE oid = #{oid}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        platform_taobao_service_order
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="oid != null and oid != ''" > oid, </if>
+            <if test="tid != null and tid != ''" > tid, </if>
+            <if test="itemOid != null and itemOid != ''" > item_oid, </if>
+            <if test="serviceId != null and serviceId != ''" > service_id, </if>
+            <if test="serviceDetailUrl != null and serviceDetailUrl != ''" > service_detail_url, </if>
+            <if test="num != null and num != ''" > num, </if>
+            <if test="price != null and price != ''" > price, </if>
+            <if test="payment != null and payment != ''" > payment, </if>
+            <if test="title != null and title != ''" > title, </if>
+            <if test="totalFee != null and totalFee != ''" > total_fee, </if>
+            <if test="buyerNick != null and buyerNick != ''" > buyer_nick, </if>
+            <if test="refundId != null and refundId != ''" > refund_id, </if>
+            <if test="sellerNick != null and sellerNick != ''" > seller_nick, </if>
+            <if test="picPath != null and picPath != ''" > pic_path, </if>
+            <if test="tmserSpuCode != null and tmserSpuCode != ''" > tmser_spu_code, </if>
+            <if test="oidStr != null and oidStr != ''" > oid_str, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="oid != null and oid !=''" > #{oid}, </if>
+            <if test="tid != null and tid !=''" > #{tid}, </if>
+            <if test="itemOid != null and itemOid !=''" > #{itemOid}, </if>
+            <if test="serviceId != null and serviceId !=''" > #{serviceId}, </if>
+            <if test="serviceDetailUrl != null and serviceDetailUrl !=''" > #{serviceDetailUrl}, </if>
+            <if test="num != null and num !=''" > #{num}, </if>
+            <if test="price != null and price !=''" > #{price}, </if>
+            <if test="payment != null and payment !=''" > #{payment}, </if>
+            <if test="title != null and title !=''" > #{title}, </if>
+            <if test="totalFee != null and totalFee !=''" > #{totalFee}, </if>
+            <if test="buyerNick != null and buyerNick !=''" > #{buyerNick}, </if>
+            <if test="refundId != null and refundId !=''" > #{refundId}, </if>
+            <if test="sellerNick != null and sellerNick !=''" > #{sellerNick}, </if>
+            <if test="picPath != null and picPath !=''" > #{picPath}, </if>
+            <if test="tmserSpuCode != null and tmserSpuCode !=''" > #{tmserSpuCode}, </if>
+            <if test="oidStr != null and oidStr !=''" > #{oidStr}, </if>
+        </trim>
+    </insert>
+
+
+</mapper>

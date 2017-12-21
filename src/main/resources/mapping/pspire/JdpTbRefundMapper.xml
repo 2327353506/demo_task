@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.pspire.JdpTbRefundDao">
+
+    <sql id="Base_Column_List">
+        refund_id refundId,
+        seller_nick sellerNick,
+        buyer_nick buyerNick,
+        status,
+        created,
+        tid,
+        oid,
+        modified,
+        jdp_hashcode jdpHashcode,
+        jdp_response jdpResponse,
+        jdp_created jdpCreated,
+        jdp_modified jdpModified
+    </sql>
+
+
+
+    <select id="findList" resultType="demo.po.jdp.JdpTbRefund">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM jdp_tb_refund
+        where jdp_modified > DATE_SUB(now(),INTERVAL 2 Day)
+        limit ${page*100},100
+    </select>
+
+
+
+
+
+</mapper>

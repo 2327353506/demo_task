@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.vipmro.SysJobLogDao">
+
+    <sql id="Base_Column_List">
+        id,
+        job_class jobClass,
+        start_time startTime,
+        end_time endTime,
+        status,
+        error_info errorInfo
+    </sql>
+
+
+    <select id="findListCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM sys_job_log
+    </select>
+
+    <select id="findList" resultType="map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_job_log
+        ${limit}
+    </select>
+
+    <select id="findById" resultType="map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_job_log
+        WHERE id = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        sys_job_log
+        SET
+        <trim  suffixOverrides="," >
+            <if test="id !=null"> id = #{id}, </if>
+            <if test="jobClass !=null"> job_class = #{jobClass}, </if>
+            <if test="startTime !=null"> start_time = #{startTime}, </if>
+            <if test="endTime !=null"> end_time = #{endTime}, </if>
+            <if test="status !=null"> status = #{status}, </if>
+            <if test="errorInfo !=null"> error_info = #{errorInfo}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        sys_job_log
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id != ''" > id, </if>
+            <if test="jobClass != null and jobClass != ''" > job_class, </if>
+            <if test="startTime != null and startTime != ''" > start_time, </if>
+            <if test="endTime != null and endTime != ''" > end_time, </if>
+            <if test="status != null and status != ''" > status, </if>
+            <if test="errorInfo != null and errorInfo != ''" > error_info, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id !=''" > #{id}, </if>
+            <if test="jobClass != null and jobClass !=''" > #{jobClass}, </if>
+            <if test="startTime != null and startTime !=''" > #{startTime}, </if>
+            <if test="endTime != null and endTime !=''" > #{endTime}, </if>
+            <if test="status != null and status !=''" > #{status}, </if>
+            <if test="errorInfo != null and errorInfo !=''" > #{errorInfo}, </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM
+        sys_job_log
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

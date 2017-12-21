@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformTaobaoTradeDao">
+
+    <sql id="Base_Column_List">
+        tid,
+        tid_str tidStr,
+        seller_nick sellerNick,
+        payment,
+        post_fee postFee,
+        paid_coupon_fee paidCouponFee,
+        shop_pick shopPick,
+        credit_card_fee creditCardFee,
+        buyer_nick buyerNick,
+        receiver_name receiverName,
+        receiver_country receiverCountry,
+        receiver_state receiverState,
+        receiver_city receiverCity,
+        receiver_district receiverDistrict,
+        receiver_town receiverTown,
+        receiver_address receiverAddress,
+        receiver_zip receiverZip,
+        receiver_mobile receiverMobile,
+        receiver_phone receiverPhone,
+        received_payment receivedPayment,
+        invoice_kind invoiceKind,
+        invoice_name invoiceName,
+        invoice_type invoiceType,
+        num,
+        status,
+        type,
+        price,
+        discount_fee discountFee,
+        total_fee totalFee,
+        created,
+        pay_time payTime,
+        modified,
+        end_time endTime,
+        buyer_message buyerMessage,
+        buyer_memo buyerMemo,
+        buyer_flag buyerFlag,
+        seller_memo sellerMemo,
+        seller_flag sellerFlag,
+        shipping_type shippingType,
+        step_trade_status stepTradeStatus,
+        step_paid_fee stepPaidFee,
+        buyer_cod_fee buyerCodFee,
+        trade_from tradeFrom
+    </sql>
+
+
+
+
+    <select id="findById" resultType="demo.po.oms.PlatformTaobaoTrade">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_taobao_trade
+        WHERE tid = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_taobao_trade
+        SET
+        <trim  suffixOverrides="," >
+            <if test="tid !=null"> tid = #{tid}, </if>
+            <if test="tidStr !=null"> tid_str = #{tidStr}, </if>
+            <if test="sellerNick !=null"> seller_nick = #{sellerNick}, </if>
+            <if test="payment !=null"> payment = #{payment}, </if>
+            <if test="postFee !=null"> post_fee = #{postFee}, </if>
+            <if test="paidCouponFee !=null"> paid_coupon_fee = #{paidCouponFee}, </if>
+            <if test="shopPick !=null"> shop_pick = #{shopPick}, </if>
+            <if test="creditCardFee !=null"> credit_card_fee = #{creditCardFee}, </if>
+            <if test="buyerNick !=null"> buyer_nick = #{buyerNick}, </if>
+            <if test="receiverName !=null"> receiver_name = #{receiverName}, </if>
+            <if test="receiverCountry !=null"> receiver_country = #{receiverCountry}, </if>
+            <if test="receiverState !=null"> receiver_state = #{receiverState}, </if>
+            <if test="receiverCity !=null"> receiver_city = #{receiverCity}, </if>
+            <if test="receiverDistrict !=null"> receiver_district = #{receiverDistrict}, </if>
+            <if test="receiverTown !=null"> receiver_town = #{receiverTown}, </if>
+            <if test="receiverAddress !=null"> receiver_address = #{receiverAddress}, </if>
+            <if test="receiverZip !=null"> receiver_zip = #{receiverZip}, </if>
+            <if test="receiverMobile !=null"> receiver_mobile = #{receiverMobile}, </if>
+            <if test="receiverPhone !=null"> receiver_phone = #{receiverPhone}, </if>
+            <if test="receivedPayment !=null"> received_payment = #{receivedPayment}, </if>
+            <if test="invoiceKind !=null"> invoice_kind = #{invoiceKind}, </if>
+            <if test="invoiceName !=null"> invoice_name = #{invoiceName}, </if>
+            <if test="invoiceType !=null"> invoice_type = #{invoiceType}, </if>
+            <if test="num !=null"> num = #{num}, </if>
+            <if test="status !=null"> status = #{status}, </if>
+            <if test="type !=null"> type = #{type}, </if>
+            <if test="price !=null"> price = #{price}, </if>
+            <if test="discountFee !=null"> discount_fee = #{discountFee}, </if>
+            <if test="totalFee !=null"> total_fee = #{totalFee}, </if>
+            <if test="created !=null"> created = #{created}, </if>
+            <if test="payTime !=null"> pay_time = #{payTime}, </if>
+            <if test="modified !=null"> modified = #{modified}, </if>
+            <if test="endTime !=null"> end_time = #{endTime}, </if>
+            <if test="buyerMessage !=null"> buyer_message = #{buyerMessage}, </if>
+            <if test="buyerMemo !=null"> buyer_memo = #{buyerMemo}, </if>
+            <if test="buyerFlag !=null"> buyer_flag = #{buyerFlag}, </if>
+            <if test="sellerMemo !=null"> seller_memo = #{sellerMemo}, </if>
+            <if test="sellerFlag !=null"> seller_flag = #{sellerFlag}, </if>
+            <if test="shippingType !=null"> shipping_type = #{shippingType}, </if>
+            <if test="stepTradeStatus !=null"> step_trade_status = #{stepTradeStatus}, </if>
+            <if test="stepPaidFee !=null"> step_paid_fee = #{stepPaidFee}, </if>
+            <if test="buyerCodFee !=null"> buyer_cod_fee = #{buyerCodFee}, </if>
+            <if test="tradeFrom !=null"> trade_from = #{tradeFrom}, </if>
+        </trim>
+        WHERE tid = #{tid}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        platform_taobao_trade
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="tid != null and tid != ''" > tid, </if>
+            <if test="tidStr != null and tidStr != ''" > tid_str, </if>
+            <if test="sellerNick != null and sellerNick != ''" > seller_nick, </if>
+            <if test="payment != null and payment != ''" > payment, </if>
+            <if test="postFee != null and postFee != ''" > post_fee, </if>
+            <if test="paidCouponFee != null and paidCouponFee != ''" > paid_coupon_fee, </if>
+            <if test="shopPick != null and shopPick != ''" > shop_pick, </if>
+            <if test="creditCardFee != null and creditCardFee != ''" > credit_card_fee, </if>
+            <if test="buyerNick != null and buyerNick != ''" > buyer_nick, </if>
+            <if test="receiverName != null and receiverName != ''" > receiver_name, </if>
+            <if test="receiverCountry != null and receiverCountry != ''" > receiver_country, </if>
+            <if test="receiverState != null and receiverState != ''" > receiver_state, </if>
+            <if test="receiverCity != null and receiverCity != ''" > receiver_city, </if>
+            <if test="receiverDistrict != null and receiverDistrict != ''" > receiver_district, </if>
+            <if test="receiverTown != null and receiverTown != ''" > receiver_town, </if>
+            <if test="receiverAddress != null and receiverAddress != ''" > receiver_address, </if>
+            <if test="receiverZip != null and receiverZip != ''" > receiver_zip, </if>
+            <if test="receiverMobile != null and receiverMobile != ''" > receiver_mobile, </if>
+            <if test="receiverPhone != null and receiverPhone != ''" > receiver_phone, </if>
+            <if test="receivedPayment != null and receivedPayment != ''" > received_payment, </if>
+            <if test="invoiceKind != null and invoiceKind != ''" > invoice_kind, </if>
+            <if test="invoiceName != null and invoiceName != ''" > invoice_name, </if>
+            <if test="invoiceType != null and invoiceType != ''" > invoice_type, </if>
+            <if test="num != null and num != ''" > num, </if>
+            <if test="status != null and status != ''" > status, </if>
+            <if test="type != null and type != ''" > type, </if>
+            <if test="price != null and price != ''" > price, </if>
+            <if test="discountFee != null and discountFee != ''" > discount_fee, </if>
+            <if test="totalFee != null and totalFee != ''" > total_fee, </if>
+            <if test="created != null and created != ''" > created, </if>
+            <if test="payTime != null and payTime != ''" > pay_time, </if>
+            <if test="modified != null and modified != ''" > modified, </if>
+            <if test="endTime != null and endTime != ''" > end_time, </if>
+            <if test="buyerMessage != null and buyerMessage != ''" > buyer_message, </if>
+            <if test="buyerMemo != null and buyerMemo != ''" > buyer_memo, </if>
+            <if test="buyerFlag != null and buyerFlag != ''" > buyer_flag, </if>
+            <if test="sellerMemo != null and sellerMemo != ''" > seller_memo, </if>
+            <if test="sellerFlag != null and sellerFlag != ''" > seller_flag, </if>
+            <if test="shippingType != null and shippingType != ''" > shipping_type, </if>
+            <if test="stepTradeStatus != null and stepTradeStatus != ''" > step_trade_status, </if>
+            <if test="stepPaidFee != null and stepPaidFee != ''" > step_paid_fee, </if>
+            <if test="buyerCodFee != null and buyerCodFee != ''" > buyer_cod_fee, </if>
+            <if test="tradeFrom != null and tradeFrom != ''" > trade_from, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="tid != null and tid !=''" > #{tid}, </if>
+            <if test="tidStr != null and tidStr !=''" > #{tidStr}, </if>
+            <if test="sellerNick != null and sellerNick !=''" > #{sellerNick}, </if>
+            <if test="payment != null and payment !=''" > #{payment}, </if>
+            <if test="postFee != null and postFee !=''" > #{postFee}, </if>
+            <if test="paidCouponFee != null and paidCouponFee !=''" > #{paidCouponFee}, </if>
+            <if test="shopPick != null and shopPick !=''" > #{shopPick}, </if>
+            <if test="creditCardFee != null and creditCardFee !=''" > #{creditCardFee}, </if>
+            <if test="buyerNick != null and buyerNick !=''" > #{buyerNick}, </if>
+            <if test="receiverName != null and receiverName !=''" > #{receiverName}, </if>
+            <if test="receiverCountry != null and receiverCountry !=''" > #{receiverCountry}, </if>
+            <if test="receiverState != null and receiverState !=''" > #{receiverState}, </if>
+            <if test="receiverCity != null and receiverCity !=''" > #{receiverCity}, </if>
+            <if test="receiverDistrict != null and receiverDistrict !=''" > #{receiverDistrict}, </if>
+            <if test="receiverTown != null and receiverTown !=''" > #{receiverTown}, </if>
+            <if test="receiverAddress != null and receiverAddress !=''" > #{receiverAddress}, </if>
+            <if test="receiverZip != null and receiverZip !=''" > #{receiverZip}, </if>
+            <if test="receiverMobile != null and receiverMobile !=''" > #{receiverMobile}, </if>
+            <if test="receiverPhone != null and receiverPhone !=''" > #{receiverPhone}, </if>
+            <if test="receivedPayment != null and receivedPayment !=''" > #{receivedPayment}, </if>
+            <if test="invoiceKind != null and invoiceKind !=''" > #{invoiceKind}, </if>
+            <if test="invoiceName != null and invoiceName !=''" > #{invoiceName}, </if>
+            <if test="invoiceType != null and invoiceType !=''" > #{invoiceType}, </if>
+            <if test="num != null and num !=''" > #{num}, </if>
+            <if test="status != null and status !=''" > #{status}, </if>
+            <if test="type != null and type !=''" > #{type}, </if>
+            <if test="price != null and price !=''" > #{price}, </if>
+            <if test="discountFee != null and discountFee !=''" > #{discountFee}, </if>
+            <if test="totalFee != null and totalFee !=''" > #{totalFee}, </if>
+            <if test="created != null and created !=''" > #{created}, </if>
+            <if test="payTime != null and payTime !=''" > #{payTime}, </if>
+            <if test="modified != null and modified !=''" > #{modified}, </if>
+            <if test="endTime != null and endTime !=''" > #{endTime}, </if>
+            <if test="buyerMessage != null and buyerMessage !=''" > #{buyerMessage}, </if>
+            <if test="buyerMemo != null and buyerMemo !=''" > #{buyerMemo}, </if>
+            <if test="buyerFlag != null and buyerFlag !=''" > #{buyerFlag}, </if>
+            <if test="sellerMemo != null and sellerMemo !=''" > #{sellerMemo}, </if>
+            <if test="sellerFlag != null and sellerFlag !=''" > #{sellerFlag}, </if>
+            <if test="shippingType != null and shippingType !=''" > #{shippingType}, </if>
+            <if test="stepTradeStatus != null and stepTradeStatus !=''" > #{stepTradeStatus}, </if>
+            <if test="stepPaidFee != null and stepPaidFee !=''" > #{stepPaidFee}, </if>
+            <if test="buyerCodFee != null and buyerCodFee !=''" > #{buyerCodFee}, </if>
+            <if test="tradeFrom != null and tradeFrom !=''" > #{tradeFrom}, </if>
+        </trim>
+    </insert>
+
+</mapper>

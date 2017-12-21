@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformTaobaoOrderDao">
+
+    <sql id="Base_Column_List">
+        oid,
+        tid,
+        status,
+        item_meal_name itemMealName,
+        pic_path picPath,
+        refund_status refundStatus,
+        outer_iid outerIid,
+        snapshot_url snapshotUrl,
+        seller_type sellerType,
+        cid,
+        title,
+        type,
+        num_iid numIid,
+        price,
+        item_meal_id itemMealId,
+        sku_id skuId,
+        num,
+        outer_sku_id outerSkuId,
+        order_from orderFrom,
+        total_fee totalFee,
+        payment,
+        discount_fee discountFee,
+        sku_properties_name skuPropertiesName,
+        refund_id refundId,
+        is_oversold isOversold,
+        is_service_order isServiceOrder,
+        is_daixiao isDaixiao,
+        divide_order_fee divideOrderFee,
+        part_mjz_discount partMjzDiscount,
+        tmser_spu_code tmserSpuCode,
+        inv_type invType,
+        is_sh_ship isShShip,
+        assembly_rela assemblyRela,
+        assembly_price assemblyPrice,
+        fqg_num fqgNum,
+        recharge_fee rechargeFee
+    </sql>
+
+
+    <select id="findListCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM platform_taobao_order
+    </select>
+
+    <select id="findList" resultType="demo.po.oms.PlatformTaobaoOrder">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_taobao_order
+        limit 0,10
+    </select>
+
+    <select id="findById" resultType="demo.po.oms.PlatformTaobaoOrder">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_taobao_order
+        WHERE oid = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_taobao_order
+        SET
+        <trim  suffixOverrides="," >
+            <if test="tid !=null"> tid = #{tid}, </if>
+            <if test="status !=null"> status = #{status}, </if>
+            <if test="itemMealName !=null"> item_meal_name = #{itemMealName}, </if>
+            <if test="picPath !=null"> pic_path = #{picPath}, </if>
+            <if test="refundStatus !=null"> refund_status = #{refundStatus}, </if>
+            <if test="outerIid !=null"> outer_iid = #{outerIid}, </if>
+            <if test="snapshotUrl !=null"> snapshot_url = #{snapshotUrl}, </if>
+            <if test="sellerType !=null"> seller_type = #{sellerType}, </if>
+            <if test="cid !=null"> cid = #{cid}, </if>
+            <if test="title !=null"> title = #{title}, </if>
+            <if test="type !=null"> type = #{type}, </if>
+            <if test="numIid !=null"> num_iid = #{numIid}, </if>
+            <if test="price !=null"> price = #{price}, </if>
+            <if test="itemMealId !=null"> item_meal_id = #{itemMealId}, </if>
+            <if test="skuId !=null"> sku_id = #{skuId}, </if>
+            <if test="num !=null"> num = #{num}, </if>
+            <if test="outerSkuId !=null"> outer_sku_id = #{outerSkuId}, </if>
+            <if test="orderFrom !=null"> order_from = #{orderFrom}, </if>
+            <if test="totalFee !=null"> total_fee = #{totalFee}, </if>
+            <if test="payment !=null"> payment = #{payment}, </if>
+            <if test="discountFee !=null"> discount_fee = #{discountFee}, </if>
+            <if test="skuPropertiesName !=null"> sku_properties_name = #{skuPropertiesName}, </if>
+            <if test="refundId !=null"> refund_id = #{refundId}, </if>
+            <if test="isOversold !=null"> is_oversold = #{isOversold}, </if>
+            <if test="isServiceOrder !=null"> is_service_order = #{isServiceOrder}, </if>
+            <if test="isDaixiao !=null"> is_daixiao = #{isDaixiao}, </if>
+            <if test="divideOrderFee !=null"> divide_order_fee = #{divideOrderFee}, </if>
+            <if test="partMjzDiscount !=null"> part_mjz_discount = #{partMjzDiscount}, </if>
+            <if test="tmserSpuCode !=null"> tmser_spu_code = #{tmserSpuCode}, </if>
+            <if test="invType !=null"> inv_type = #{invType}, </if>
+            <if test="isShShip !=null"> is_sh_ship = #{isShShip}, </if>
+            <if test="assemblyRela !=null"> assembly_rela = #{assemblyRela}, </if>
+            <if test="assemblyPrice !=null"> assembly_price = #{assemblyPrice}, </if>
+            <if test="fqgNum !=null"> fqg_num = #{fqgNum}, </if>
+            <if test="rechargeFee !=null"> recharge_fee = #{rechargeFee}, </if>
+        </trim>
+        WHERE oid = #{oid}
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        platform_taobao_order
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="oid != null and oid != ''" > oid, </if>
+            <if test="tid != null and tid != ''" > tid, </if>
+            <if test="status != null and status != ''" > status, </if>
+            <if test="itemMealName != null and itemMealName != ''" > item_meal_name, </if>
+            <if test="picPath != null and picPath != ''" > pic_path, </if>
+            <if test="refundStatus != null and refundStatus != ''" > refund_status, </if>
+            <if test="outerIid != null and outerIid != ''" > outer_iid, </if>
+            <if test="snapshotUrl != null and snapshotUrl != ''" > snapshot_url, </if>
+            <if test="sellerType != null and sellerType != ''" > seller_type, </if>
+            <if test="cid != null and cid != ''" > cid, </if>
+            <if test="title != null and title != ''" > title, </if>
+            <if test="type != null and type != ''" > type, </if>
+            <if test="numIid != null and numIid != ''" > num_iid, </if>
+            <if test="price != null and price != ''" > price, </if>
+            <if test="itemMealId != null and itemMealId != ''" > item_meal_id, </if>
+            <if test="skuId != null and skuId != ''" > sku_id, </if>
+            <if test="num != null and num != ''" > num, </if>
+            <if test="outerSkuId != null and outerSkuId != ''" > outer_sku_id, </if>
+            <if test="orderFrom != null and orderFrom != ''" > order_from, </if>
+            <if test="totalFee != null and totalFee != ''" > total_fee, </if>
+            <if test="payment != null and payment != ''" > payment, </if>
+            <if test="discountFee != null and discountFee != ''" > discount_fee, </if>
+            <if test="skuPropertiesName != null and skuPropertiesName != ''" > sku_properties_name, </if>
+            <if test="refundId != null and refundId != ''" > refund_id, </if>
+            <if test="isOversold != null and isOversold != ''" > is_oversold, </if>
+            <if test="isServiceOrder != null and isServiceOrder != ''" > is_service_order, </if>
+            <if test="isDaixiao != null and isDaixiao != ''" > is_daixiao, </if>
+            <if test="divideOrderFee != null and divideOrderFee != ''" > divide_order_fee, </if>
+            <if test="partMjzDiscount != null and partMjzDiscount != ''" > part_mjz_discount, </if>
+            <if test="tmserSpuCode != null and tmserSpuCode != ''" > tmser_spu_code, </if>
+            <if test="invType != null and invType != ''" > inv_type, </if>
+            <if test="isShShip != null and isShShip != ''" > is_sh_ship, </if>
+            <if test="assemblyRela != null and assemblyRela != ''" > assembly_rela, </if>
+            <if test="assemblyPrice != null and assemblyPrice != ''" > assembly_price, </if>
+            <if test="fqgNum != null and fqgNum != ''" > fqg_num, </if>
+            <if test="rechargeFee != null and rechargeFee != ''" > recharge_fee, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="oid != null and oid !=''" > #{oid}, </if>
+            <if test="tid != null and tid !=''" > #{tid}, </if>
+            <if test="status != null and status !=''" > #{status}, </if>
+            <if test="itemMealName != null and itemMealName !=''" > #{itemMealName}, </if>
+            <if test="picPath != null and picPath !=''" > #{picPath}, </if>
+            <if test="refundStatus != null and refundStatus !=''" > #{refundStatus}, </if>
+            <if test="outerIid != null and outerIid !=''" > #{outerIid}, </if>
+            <if test="snapshotUrl != null and snapshotUrl !=''" > #{snapshotUrl}, </if>
+            <if test="sellerType != null and sellerType !=''" > #{sellerType}, </if>
+            <if test="cid != null and cid !=''" > #{cid}, </if>
+            <if test="title != null and title !=''" > #{title}, </if>
+            <if test="type != null and type !=''" > #{type}, </if>
+            <if test="numIid != null and numIid !=''" > #{numIid}, </if>
+            <if test="price != null and price !=''" > #{price}, </if>
+            <if test="itemMealId != null and itemMealId !=''" > #{itemMealId}, </if>
+            <if test="skuId != null and skuId !=''" > #{skuId}, </if>
+            <if test="num != null and num !=''" > #{num}, </if>
+            <if test="outerSkuId != null and outerSkuId !=''" > #{outerSkuId}, </if>
+            <if test="orderFrom != null and orderFrom !=''" > #{orderFrom}, </if>
+            <if test="totalFee != null and totalFee !=''" > #{totalFee}, </if>
+            <if test="payment != null and payment !=''" > #{payment}, </if>
+            <if test="discountFee != null and discountFee !=''" > #{discountFee}, </if>
+            <if test="skuPropertiesName != null and skuPropertiesName !=''" > #{skuPropertiesName}, </if>
+            <if test="refundId != null and refundId !=''" > #{refundId}, </if>
+            <if test="isOversold != null and isOversold !=''" > #{isOversold}, </if>
+            <if test="isServiceOrder != null and isServiceOrder !=''" > #{isServiceOrder}, </if>
+            <if test="isDaixiao != null and isDaixiao !=''" > #{isDaixiao}, </if>
+            <if test="divideOrderFee != null and divideOrderFee !=''" > #{divideOrderFee}, </if>
+            <if test="partMjzDiscount != null and partMjzDiscount !=''" > #{partMjzDiscount}, </if>
+            <if test="tmserSpuCode != null and tmserSpuCode !=''" > #{tmserSpuCode}, </if>
+            <if test="invType != null and invType !=''" > #{invType}, </if>
+            <if test="isShShip != null and isShShip !=''" > #{isShShip}, </if>
+            <if test="assemblyRela != null and assemblyRela !=''" > #{assemblyRela}, </if>
+            <if test="assemblyPrice != null and assemblyPrice !=''" > #{assemblyPrice}, </if>
+            <if test="fqgNum != null and fqgNum !=''" > #{fqgNum}, </if>
+            <if test="rechargeFee != null and rechargeFee !=''" > #{rechargeFee}, </if>
+        </trim>
+    </insert>
+
+
+
+</mapper>

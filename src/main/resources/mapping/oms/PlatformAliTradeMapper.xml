@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformAliTradeDao">
+
+    <sql id="Base_Column_List">
+        id,
+        business_type businessType,
+        create_time createTime,
+        modify_time modifyTime,
+        pay_time payTime,
+        receiving_time receivingTime,
+        all_delivered_time allDeliveredTime,
+        complete_time completeTime,
+        remark,
+        buyer_id buyerId,
+        buyer_memo buyerMemo,
+        buyer_feedback buyerFeedback,
+        seller_id sellerId,
+        seller_memo sellerMemo,
+        seller_sub_id sellerSubId,
+        total_amount totalAmount,
+        shipping_fee shippingFee,
+        currency,
+        sum_product_payment sumProductPayment,
+        refund,
+        discount,
+        status,
+        step_payall stepPayall,
+        buyer_alipay_id buyerAlipayId,
+        seller_alipay_id sellerAlipayId,
+        trade_type tradeType,
+        id_of_str idOfStr,
+        alipay_trade_id alipayTradeId,
+        confirmed_time confirmedTime,
+        close_reason closeReason,
+        to_full_name toFullName,
+        to_mobile toMobile,
+        to_phone toPhone,
+        to_post toPost,
+        to_area toArea
+    </sql>
+
+
+    <select id="findListCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM platform_ali_trade
+    </select>
+
+    <select id="findList" resultType="demo.po.oms.PlatformAliTrade">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_ali_trade
+        limit 0,10
+    </select>
+
+    <select id="findById" resultType="demo.po.oms.PlatformAliTrade">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_ali_trade
+        WHERE id = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_ali_trade
+        SET
+        <trim  suffixOverrides="," >
+            <if test="id !=null"> id = #{id}, </if>
+            <if test="businessType !=null"> business_type = #{businessType}, </if>
+            <if test="createTime !=null"> create_time = #{createTime}, </if>
+            <if test="modifyTime !=null"> modify_time = #{modifyTime}, </if>
+            <if test="payTime !=null"> pay_time = #{payTime}, </if>
+            <if test="receivingTime !=null"> receiving_time = #{receivingTime}, </if>
+            <if test="allDeliveredTime !=null"> all_delivered_time = #{allDeliveredTime}, </if>
+            <if test="completeTime !=null"> complete_time = #{completeTime}, </if>
+            <if test="remark !=null"> remark = #{remark}, </if>
+            <if test="buyerId !=null"> buyer_id = #{buyerId}, </if>
+            <if test="buyerMemo !=null"> buyer_memo = #{buyerMemo}, </if>
+            <if test="buyerFeedback !=null"> buyer_feedback = #{buyerFeedback}, </if>
+            <if test="sellerId !=null"> seller_id = #{sellerId}, </if>
+            <if test="sellerMemo !=null"> seller_memo = #{sellerMemo}, </if>
+            <if test="sellerSubId !=null"> seller_sub_id = #{sellerSubId}, </if>
+            <if test="totalAmount !=null"> total_amount = #{totalAmount}, </if>
+            <if test="shippingFee !=null"> shipping_fee = #{shippingFee}, </if>
+            <if test="currency !=null"> currency = #{currency}, </if>
+            <if test="sumProductPayment !=null"> sum_product_payment = #{sumProductPayment}, </if>
+            <if test="refund !=null"> refund = #{refund}, </if>
+            <if test="discount !=null"> discount = #{discount}, </if>
+            <if test="status !=null"> status = #{status}, </if>
+            <if test="stepPayall !=null"> step_payall = #{stepPayall}, </if>
+            <if test="buyerAlipayId !=null"> buyer_alipay_id = #{buyerAlipayId}, </if>
+            <if test="sellerAlipayId !=null"> seller_alipay_id = #{sellerAlipayId}, </if>
+            <if test="tradeType !=null"> trade_type = #{tradeType}, </if>
+            <if test="idOfStr !=null"> id_of_str = #{idOfStr}, </if>
+            <if test="alipayTradeId !=null"> alipay_trade_id = #{alipayTradeId}, </if>
+            <if test="confirmedTime !=null"> confirmed_time = #{confirmedTime}, </if>
+            <if test="closeReason !=null"> close_reason = #{closeReason}, </if>
+            <if test="toFullName !=null"> to_full_name = #{toFullName}, </if>
+            <if test="toMobile !=null"> to_mobile = #{toMobile}, </if>
+            <if test="toPhone !=null"> to_phone = #{toPhone}, </if>
+            <if test="toPost !=null"> to_post = #{toPost}, </if>
+            <if test="toArea !=null"> to_area = #{toArea}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <insert id="save" >
+        INSERT INTO
+        platform_ali_trade
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id != ''" > id, </if>
+            <if test="businessType != null and businessType != ''" > business_type, </if>
+            <if test="createTime != null and createTime != ''" > create_time, </if>
+            <if test="modifyTime != null and modifyTime != ''" > modify_time, </if>
+            <if test="payTime != null and payTime != ''" > pay_time, </if>
+            <if test="receivingTime != null and receivingTime != ''" > receiving_time, </if>
+            <if test="allDeliveredTime != null and allDeliveredTime != ''" > all_delivered_time, </if>
+            <if test="completeTime != null and completeTime != ''" > complete_time, </if>
+            <if test="remark != null and remark != ''" > remark, </if>
+            <if test="buyerId != null and buyerId != ''" > buyer_id, </if>
+            <if test="buyerMemo != null and buyerMemo != ''" > buyer_memo, </if>
+            <if test="buyerFeedback != null and buyerFeedback != ''" > buyer_feedback, </if>
+            <if test="sellerId != null and sellerId != ''" > seller_id, </if>
+            <if test="sellerMemo != null and sellerMemo != ''" > seller_memo, </if>
+            <if test="sellerSubId != null and sellerSubId != ''" > seller_sub_id, </if>
+            <if test="totalAmount != null and totalAmount != ''" > total_amount, </if>
+            <if test="shippingFee != null and shippingFee != ''" > shipping_fee, </if>
+            <if test="currency != null and currency != ''" > currency, </if>
+            <if test="sumProductPayment != null and sumProductPayment != ''" > sum_product_payment, </if>
+            <if test="refund != null and refund != ''" > refund, </if>
+            <if test="discount != null and discount != ''" > discount, </if>
+            <if test="status != null and status != ''" > status, </if>
+            <if test="stepPayall != null and stepPayall != ''" > step_payall, </if>
+            <if test="buyerAlipayId != null and buyerAlipayId != ''" > buyer_alipay_id, </if>
+            <if test="sellerAlipayId != null and sellerAlipayId != ''" > seller_alipay_id, </if>
+            <if test="tradeType != null and tradeType != ''" > trade_type, </if>
+            <if test="idOfStr != null and idOfStr != ''" > id_of_str, </if>
+            <if test="alipayTradeId != null and alipayTradeId != ''" > alipay_trade_id, </if>
+            <if test="confirmedTime != null and confirmedTime != ''" > confirmed_time, </if>
+            <if test="closeReason != null and closeReason != ''" > close_reason, </if>
+            <if test="toFullName != null and toFullName != ''" > to_full_name, </if>
+            <if test="toMobile != null and toMobile != ''" > to_mobile, </if>
+            <if test="toPhone != null and toPhone != ''" > to_phone, </if>
+            <if test="toPost != null and toPost != ''" > to_post, </if>
+            <if test="toArea != null and toArea != ''" > to_area, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id !=''" > #{id}, </if>
+            <if test="businessType != null and businessType !=''" > #{businessType}, </if>
+            <if test="createTime != null and createTime !=''" > #{createTime}, </if>
+            <if test="modifyTime != null and modifyTime !=''" > #{modifyTime}, </if>
+            <if test="payTime != null and payTime !=''" > #{payTime}, </if>
+            <if test="receivingTime != null and receivingTime !=''" > #{receivingTime}, </if>
+            <if test="allDeliveredTime != null and allDeliveredTime !=''" > #{allDeliveredTime}, </if>
+            <if test="completeTime != null and completeTime !=''" > #{completeTime}, </if>
+            <if test="remark != null and remark !=''" > #{remark}, </if>
+            <if test="buyerId != null and buyerId !=''" > #{buyerId}, </if>
+            <if test="buyerMemo != null and buyerMemo !=''" > #{buyerMemo}, </if>
+            <if test="buyerFeedback != null and buyerFeedback !=''" > #{buyerFeedback}, </if>
+            <if test="sellerId != null and sellerId !=''" > #{sellerId}, </if>
+            <if test="sellerMemo != null and sellerMemo !=''" > #{sellerMemo}, </if>
+            <if test="sellerSubId != null and sellerSubId !=''" > #{sellerSubId}, </if>
+            <if test="totalAmount != null and totalAmount !=''" > #{totalAmount}, </if>
+            <if test="shippingFee != null and shippingFee !=''" > #{shippingFee}, </if>
+            <if test="currency != null and currency !=''" > #{currency}, </if>
+            <if test="sumProductPayment != null and sumProductPayment !=''" > #{sumProductPayment}, </if>
+            <if test="refund != null and refund !=''" > #{refund}, </if>
+            <if test="discount != null and discount !=''" > #{discount}, </if>
+            <if test="status != null and status !=''" > #{status}, </if>
+            <if test="stepPayall != null and stepPayall !=''" > #{stepPayall}, </if>
+            <if test="buyerAlipayId != null and buyerAlipayId !=''" > #{buyerAlipayId}, </if>
+            <if test="sellerAlipayId != null and sellerAlipayId !=''" > #{sellerAlipayId}, </if>
+            <if test="tradeType != null and tradeType !=''" > #{tradeType}, </if>
+            <if test="idOfStr != null and idOfStr !=''" > #{idOfStr}, </if>
+            <if test="alipayTradeId != null and alipayTradeId !=''" > #{alipayTradeId}, </if>
+            <if test="confirmedTime != null and confirmedTime !=''" > #{confirmedTime}, </if>
+            <if test="closeReason != null and closeReason !=''" > #{closeReason}, </if>
+            <if test="toFullName != null and toFullName !=''" > #{toFullName}, </if>
+            <if test="toMobile != null and toMobile !=''" > #{toMobile}, </if>
+            <if test="toPhone != null and toPhone !=''" > #{toPhone}, </if>
+            <if test="toPost != null and toPost !=''" > #{toPost}, </if>
+            <if test="toArea != null and toArea !=''" > #{toArea}, </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM
+        platform_ali_trade
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

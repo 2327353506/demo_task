@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.oms.PlatformAliTradeLogisticDao">
+
+    <sql id="Base_Column_List">
+        id,
+        province,
+        city,
+        area,
+        town,
+        address,
+        contact_person contactPerson,
+        fax,
+        mobile,
+        telephone,
+        zip,
+        tid
+    </sql>
+
+
+    <select id="findListCount" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM platform_ali_trade_logistic
+    </select>
+
+    <select id="findList" resultType="demo.po.oms.PlatformAliTradeLogistic">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_ali_trade_logistic
+        limit 0,10
+    </select>
+
+    <select id="findById" resultType="demo.po.oms.PlatformAliTradeLogistic">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM platform_ali_trade_logistic
+        WHERE id = #{id}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        platform_ali_trade_logistic
+        SET
+        <trim  suffixOverrides="," >
+            <if test="id !=null"> id = #{id}, </if>
+            <if test="province !=null"> province = #{province}, </if>
+            <if test="city !=null"> city = #{city}, </if>
+            <if test="area !=null"> area = #{area}, </if>
+            <if test="town !=null"> town = #{town}, </if>
+            <if test="address !=null"> address = #{address}, </if>
+            <if test="contactPerson !=null"> contact_person = #{contactPerson}, </if>
+            <if test="fax !=null"> fax = #{fax}, </if>
+            <if test="mobile !=null"> mobile = #{mobile}, </if>
+            <if test="telephone !=null"> telephone = #{telephone}, </if>
+            <if test="zip !=null"> zip = #{zip}, </if>
+            <if test="tid !=null"> tid = #{tid}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <insert id="save" >
+        INSERT INTO
+        platform_ali_trade_logistic
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id != ''" > id, </if>
+            <if test="province != null and province != ''" > province, </if>
+            <if test="city != null and city != ''" > city, </if>
+            <if test="area != null and area != ''" > area, </if>
+            <if test="town != null and town != ''" > town, </if>
+            <if test="address != null and address != ''" > address, </if>
+            <if test="contactPerson != null and contactPerson != ''" > contact_person, </if>
+            <if test="fax != null and fax != ''" > fax, </if>
+            <if test="mobile != null and mobile != ''" > mobile, </if>
+            <if test="telephone != null and telephone != ''" > telephone, </if>
+            <if test="zip != null and zip != ''" > zip, </if>
+            <if test="tid != null and tid != ''" > tid, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id !=''" > #{id}, </if>
+            <if test="province != null and province !=''" > #{province}, </if>
+            <if test="city != null and city !=''" > #{city}, </if>
+            <if test="area != null and area !=''" > #{area}, </if>
+            <if test="town != null and town !=''" > #{town}, </if>
+            <if test="address != null and address !=''" > #{address}, </if>
+            <if test="contactPerson != null and contactPerson !=''" > #{contactPerson}, </if>
+            <if test="fax != null and fax !=''" > #{fax}, </if>
+            <if test="mobile != null and mobile !=''" > #{mobile}, </if>
+            <if test="telephone != null and telephone !=''" > #{telephone}, </if>
+            <if test="zip != null and zip !=''" > #{zip}, </if>
+            <if test="tid != null and tid !=''" > #{tid}, </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM
+        platform_ali_trade_logistic
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
